@@ -25,3 +25,21 @@ class Budget:
         print(f"총 지출: {total}원\n")
 
 
+    #지정한 날짜 사이의 지출 찾기 / 날짜 형식 : yyyy-mm-dd
+    def date2date_expense(self, start_date:str = datetime.date.today().isoformat(), end_date:str = datetime.date.today().isoformat()) -> None:
+        temp_list=self.expenses
+        temp_list.sort(key=lambda x:x.date)
+        result_list=[]
+        for i in temp_list:
+            if(i.date >= start_date and i.date <= end_date):
+                result_list.append(i)
+        
+        if(len(result_list) == 0):
+            print(f'{start_date}부터 {end_date}까지 검색된 지출 내역이 없습니다.')
+        else:
+            print(f'{start_date}부터 {end_date}까지 지출 내역입니다.')
+            print('=========================================')
+            for r in result_list:
+                print(r)
+            print('=========================================')
+            
