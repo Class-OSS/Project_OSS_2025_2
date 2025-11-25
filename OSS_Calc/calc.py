@@ -19,7 +19,7 @@ class Calculator:
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            ['=']
+            ['(', ')', '='] #괄고 버튼 추가
         ]
 
         for row in buttons:
@@ -48,5 +48,13 @@ class Calculator:
         self.entry.delete(0, tk.END)
         self.entry.insert(tk.END, self.expression)
 
+    def on_enter(self, event=None):
+        # Enter 키를 누르면 바로 수식 계산 ('='과 동일한 기능)
+        try:
+            self.expression = str(eval(self.expression))
+        except Exception:
+            self.expression = "에러"
 
+        self.entry.delete(0, tk.END)
+        self.entry.insert(tk.END, self.expression)
 
