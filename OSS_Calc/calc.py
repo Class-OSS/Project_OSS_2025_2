@@ -8,7 +8,8 @@ class Calculator:
         self.root.geometry("300x400")
 
         self.expression = ""
-
+        self.memory = 0.0
+        
         # 입력창
         self.entry = tk.Entry(root, font=("Arial", 24), justify="right")
         self.entry.pack(fill="both", ipadx=8, ipady=15, padx=10, pady=10)
@@ -19,7 +20,7 @@ class Calculator:
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            ['=']
+            ['M+', 'MR', 'MC', '=']
         ]
 
         for row in buttons:
@@ -42,6 +43,16 @@ class Calculator:
                 self.expression = str(eval(self.expression))
             except Exception:
                 self.expression = "에러"
+        elif char == 'M+':
+            try:
+                value = float(self.expression)
+                self.memory += value
+            except ValueError:
+                pass
+        elif char == 'MR':
+            self.expression = str(self.memory)
+        elif char == 'MC':
+            self.memory = 0.0
         else:
             self.expression += str(char)
 
