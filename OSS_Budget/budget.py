@@ -24,4 +24,9 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
+    def print_expenses(self, num:int)-> None:
+        print(self.expenses[num-1])
 
+    def edit_expense(self, num:int, category:str, description:str, amount:int)-> None:
+        self.expenses[num-1] = Expense(self.expenses[num-1].date, category, description, amount)
+        self.print_expenses(num)
