@@ -1,5 +1,5 @@
 import tkinter as tk
-
+import math as mt
 
 class Calculator:
     def __init__(self, root):
@@ -19,7 +19,7 @@ class Calculator:
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            ['=']
+            ['l','=']
         ]
 
         for row in buttons:
@@ -42,6 +42,13 @@ class Calculator:
                 self.expression = str(eval(self.expression))
             except Exception:
                 self.expression = "에러"
+        #상용 로그 기능 추가 - 1
+        elif char == 'l':
+            try:
+                self.expression = str(mt.log10(float(self.expression)))
+            except Exception:
+                self.expression = "에러"
+        #여기까지
         else:
             self.expression += str(char)
 
