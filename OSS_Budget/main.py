@@ -1,8 +1,12 @@
 from budget import Budget
-
+import tkinter as tk
+from userInterface import userInterface
 
 def main():
     budget = Budget()
+
+    root = tk.Tk()
+    ui = userInterface(root, budget)
 
     while True:
         print("==== 간단 가계부 ====")
@@ -23,10 +27,14 @@ def main():
             budget.add_expense(category, description, amount)
 
         elif choice == "2":
-            budget.list_expenses()
+            outputString = budget.list_expenses()
+            print(outputString)
+            ui.printGraphics(outputString)
 
         elif choice == "3":
-            budget.total_spent()
+            outputString = budget.total_spent()
+            print(outputString)
+            ui.printGraphics(outputString)
 
         elif choice == "4":
             print("가계부를 종료합니다.")
