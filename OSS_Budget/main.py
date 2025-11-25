@@ -8,8 +8,10 @@ def main():
         print("==== 간단 가계부 ====")
         print("1. 지출 추가")
         print("2. 지출 목록 보기")
-        print("3. 총 지출 보기")
-        print("4. 종료")
+        print("3. 수입 추가")
+        print("4. 수입 목록 보기")
+        print("5. 총 금액 보기")
+        print("6. 종료")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -24,11 +26,24 @@ def main():
 
         elif choice == "2":
             budget.list_expenses()
-
-        elif choice == "3":
-            budget.total_spent()
-
+            
+        if choice == "3":
+            category = input("카테고리 (예: 월급, 용돈 등): ")
+            description = input("설명: ")
+            try:
+                amount = int(input("금액(원): "))
+            except ValueError:
+                print("잘못된 금액입니다.\n")
+                continue
+            budget.add_income(category, description, amount)
+        
         elif choice == "4":
+            budget.list_incomes()
+
+        elif choice == "5":
+            budget.total_money()
+
+        elif choice == "6":
             print("가계부를 종료합니다.")
             break
 
