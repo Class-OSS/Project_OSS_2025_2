@@ -1,5 +1,5 @@
 import tkinter as tk
-
+import math # 삼각함수 계산을 위해
 
 class Calculator:
     def __init__(self, root):
@@ -15,6 +15,7 @@ class Calculator:
 
         # 버튼 생성
         buttons = [
+            ['sin', 'cos', 'tan', '(', ')'], # 삼각함수 전용
             ['7', '8', '9', '/'],
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
@@ -39,11 +40,20 @@ class Calculator:
             self.expression = ""
         elif char == '=':
             try:
-                self.expression = str(eval(self.expression))
+                expr = self.expression
+                expr = expr.replace('sin', 'math.sin')
+                expr = expr.replace('cos', 'math.cos')
+                expr = expr.replace('tan', 'math.tan')
+                
+                self.expression = str(eval(expr))
             except Exception:
                 self.expression = "에러"
         else:
-            self.expression += str(char)
+            # 함수 입력 시 괄호 자동 열기
+            if char in ['sin', 'cos', 'tan']:
+                self.expression += char + "("
+            else:
+                self.expression += str(char)
 
         self.entry.delete(0, tk.END)
         self.entry.insert(tk.END, self.expression)
