@@ -24,4 +24,16 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
+    def max_expense(self):
+          if not self.expenses :
+               print("지출 내역이 없습니다.\n")
+               return
+          max_e = max(self.expenses, key=lambda e: e.amount)
+          print(f"가장 큰 지출 : {max_e}\n")
 
+    def min_expense(self) :
+          if not self.expenses :
+               print("지출 내역이 없습니다.\n")
+               return
+          min_e = min(self.expenses, key=lambda e: e.amount)
+          print(f"가장 작은 지출: {min_e}\n")
