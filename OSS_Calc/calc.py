@@ -19,7 +19,7 @@ class Calculator:
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            ['=']
+            ['BIN', '=']
         ]
 
         for row in buttons:
@@ -42,6 +42,14 @@ class Calculator:
                 self.expression = str(eval(self.expression))
             except Exception:
                 self.expression = "에러"
+
+        elif char == 'BIN':
+            try :
+                value = int(eval(self.expression))
+                self.expression = bin(value)[2:]
+            except Exception:
+                self.expression = "Error"
+            
         else:
             self.expression += str(char)
 
