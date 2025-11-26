@@ -98,4 +98,6 @@ class Calculator:
         elif key.lower() == 'a':
             self.on_click('Ans')
 
-
+        # = 버튼
+        elif char == '=':
+            self.on_click('=')
