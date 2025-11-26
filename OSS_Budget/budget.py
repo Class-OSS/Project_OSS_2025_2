@@ -5,11 +5,13 @@ class Budget:
     def __init__(self):
         self.expenses = []
 
-    def add_expense(self, category, description, amount):
+    # user_name 인자 추가
+    def add_expense(self, category, description, amount, user_name):
         today = datetime.date.today().isoformat()
-        expense = Expense(today, category, description, amount)
+        # Expense 객체 생성 시 user_name 전달
+        expense = Expense(today, category, description, amount, user_name)
         self.expenses.append(expense)
-        print("지출이 추가되었습니다.\n")
+        print(f"{user_name}님의 지출이 추가되었습니다.\n")
 
     def list_expenses(self):
         if not self.expenses:
@@ -23,5 +25,3 @@ class Budget:
     def total_spent(self):
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
-
-
