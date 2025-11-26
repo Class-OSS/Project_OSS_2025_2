@@ -1,5 +1,5 @@
 import tkinter as tk
-
+import math as mt
 
 class Calculator:
     def __init__(self, root):
@@ -19,7 +19,7 @@ class Calculator:
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            ['=']
+            ['s','c','t','=']
         ]
 
         for row in buttons:
@@ -42,6 +42,23 @@ class Calculator:
                 self.expression = str(eval(self.expression))
             except Exception:
                 self.expression = "에러"
+        #삼각함수 sin cos tan 기능 추가 - 2
+        elif char == 's':
+            try:
+                self.expression = str(mt.sin(float(self.expression)))
+            except Exception:
+                self.expression = "에러"
+        elif char == 'c':
+            try:
+                self.expression = str(mt.cos(float(self.expression)))
+            except Exception:
+                self.expression = "에러"
+        elif char == 't':
+            try:
+                self.expression = str(mt.tan(float(self.expression)))
+            except Exception:
+                self.expression = "에러"
+        #여기까지
         else:
             self.expression += str(char)
 
