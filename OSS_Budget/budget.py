@@ -23,5 +23,25 @@ class Budget:
     def total_spent(self):
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
-
-
+    
+    def monthly_summary(self): #월별 지출 내역 & 합계
+        if not self.expenses:
+            print("지출 내역이 없습니다. \n")
+            return
+            
+        monthly_data = {}
+        
+        for i in self.expenses:
+            month = i.date[:7]
+            if month not in monthly_data:
+                monthly_data[month] = {"total": 0, "items": []}
+            monthly_data[month] ["total"] += i.amount
+            monthly_data[month] ["items"].append(i)
+            
+        print("\n [월별 지출 내역]")
+        for month in sorted(monthly_data.keys()):
+            print(f"{month} | 총 지출 {monthly_data[month] ['total']}원")
+            print("---상세 지출 내역---")
+            for i, item in enumerate(monthly_data[month]["items"], 1):
+                print(f" {i}. {item}")
+            print()
