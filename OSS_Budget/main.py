@@ -10,10 +10,27 @@ def main():
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
         print("4. 종료")
+
+
+
+
+
+
+        
         choice = input("선택 > ")
 
         if choice == "1":
-            category = input("카테고리 (예: 식비, 교통 등): ")
+            # [수정 후 위치] 여기(1번을 선택한 직후)로 옮겨야 합니다!
+            # ============================================
+            existing_cats = budget.get_existing_categories()
+            if existing_cats:
+                print(f"   (현재 생성된 카테고리: {', '.join(existing_cats)})")
+            else:
+                print("   (아직 등록된 카테고리가 없습니다. 새로 입력하세요.)")
+            # ============================================
+
+
+            category = input("카테고리: ")
             description = input("설명: ")
             try:
                 amount = int(input("금액(원): "))

@@ -24,4 +24,8 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
+    def get_existing_categories(self):
+# 현재 존재하는 카테고리들을 중복 없이 추출 (Java의 Set과 동일)
+        return list(set(e.category for e in self.expenses))    
+
 
