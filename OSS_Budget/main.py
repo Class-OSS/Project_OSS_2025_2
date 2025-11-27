@@ -1,5 +1,5 @@
 from budget import Budget
-
+import datetime
 
 def main():
     budget = Budget()
@@ -13,6 +13,17 @@ def main():
         choice = input("선택 > ")
 
         if choice == "1":
+            date = input("날짜 입력(YYYY-MM-DD, 입력하지않는다면 오늘날짜) : ").strip()
+            
+            if date == " ":
+                date = datetime.date.today().isoformat()
+            else:
+               try:
+                   datetime.date.fromisoformat(date)
+               except ValueError:
+                   print("날짜 형식이 잘못되었습니다. 다시입력해주세요")
+                   continue
+
             category = input("카테고리 (예: 식비, 교통 등): ")
             description = input("설명: ")
             try:
@@ -20,7 +31,8 @@ def main():
             except ValueError:
                 print("잘못된 금액입니다.\n")
                 continue
-            budget.add_expense(category, description, amount)
+            budget.add_expense(date,category, description, amount)
+
 
         elif choice == "2":
             budget.list_expenses()
