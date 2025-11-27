@@ -5,9 +5,8 @@ class Budget:
     def __init__(self):
         self.expenses = []
 
-    def add_expense(self, category, description, amount):
-        today = datetime.date.today().isoformat()
-        expense = Expense(today, category, description, amount)
+    def add_expense(self,date , category, description, amount):
+        expense = Expense(date, category, description, amount)
         self.expenses.append(expense)
         print("지출이 추가되었습니다.\n")
 
