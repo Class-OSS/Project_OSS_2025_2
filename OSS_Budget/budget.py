@@ -24,4 +24,13 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
+    def clear_expenses(self):
+        confirm = input("❗ 모든 지출 내역을 초기화하시겠습니까? (y/n): ")
+        if confirm.lower() == 'y':
+            self.expenses = []
+            print("모든 지출 내역이 초기화되었습니다.\n")
+        else:
+            print("초기화가 취소되었습니다.\n")
+
+
 
