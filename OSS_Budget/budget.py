@@ -24,4 +24,19 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
+    #특정 카테고리만 추적 - 3
+    def find(self):
+        print("찾고싶은 카테고리를 입력하세요 >> ")
+        temp=input()
+        if not self.expenses:
+            print("지출 내역이 없습니다.\n")
+            return
+        for idx, e in enumerate(self.expenses, 1):
+            if e.category == temp:
+                print(f"{idx}. {e}")
+            else :
+                print('-')
+        print()
+        #여기까지
+
 
