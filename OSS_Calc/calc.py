@@ -1,5 +1,5 @@
 import tkinter as tk
-
+import os
 
 class Calculator:
     def __init__(self, root):
@@ -8,6 +8,11 @@ class Calculator:
         self.root.geometry("300x400")
 
         self.expression = ""
+        
+        #로그 txt파일 생성
+        if not os.path.exists("calc_log.txt"):
+            with open("calc_log.txt", "w") as f:
+                f.write("[계산결과]\n")
 
         # 입력창
         self.entry = tk.Entry(root, font=("Arial", 24), justify="right")
@@ -38,10 +43,21 @@ class Calculator:
         if char == 'C':
             self.expression = ""
         elif char == '=':
+            now_expression = self.expression
+            result = ""
             try:
-                self.expression = str(eval(self.expression))
+                result = str(eval(self.expression))
+                self.expression = result
             except Exception:
                 self.expression = "에러"
+                result = "에러"
+            
+            #txt파일에 저장
+            try:
+                with open("calc_log.txt", "a") as f:
+                    f.write(f"{now_expression} = {result}\n")
+            except Exception:
+                print(f"오류 발생")
         else:
             self.expression += str(char)
 
