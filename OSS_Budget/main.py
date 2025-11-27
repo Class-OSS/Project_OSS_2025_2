@@ -4,12 +4,20 @@ from budget import Budget
 def main():
     budget = Budget()
 
+    print("==== 월간 예산 설정 ====")
+    try:
+         m = int(input("이번 달 예산(원): "))
+         budget.set_month_budget(m)
+    except ValueError:
+          print("잘못된 숫자입니다. 예산 없이 진행합니다.\n")
+
     while True:
         print("==== 간단 가계부 ====")
         print("1. 지출 추가")
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
-        print("4. 종료")
+        print("4. 월 예산 사용 현황 보기")
+        print("5. 종료")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -29,6 +37,9 @@ def main():
             budget.total_spent()
 
         elif choice == "4":
+            budget.month_status()
+
+        elif choice == "5":
             print("가계부를 종료합니다.")
             break
 
