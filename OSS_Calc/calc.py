@@ -15,6 +15,8 @@ class Calculator:
 
         # 버튼 생성
         buttons = [
+            ['00', '000', '0000'],
+            ['10%dc', '20%dc', '30%dc'],
             ['7', '8', '9', '/'],
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
@@ -39,9 +41,34 @@ class Calculator:
             self.expression = ""
         elif char == '=':
             try:
+                # 일반 계산
                 self.expression = str(eval(self.expression))
             except Exception:
                 self.expression = "에러"
+
+        elif char == '0000':
+            self.expression += "0000"
+        elif char == '000':
+            self.expression += "000"
+        elif char == '00':
+            self.expression += "00"
+
+        elif 'dc' in char:
+            try:
+                current_val = float(eval(self.expression))
+                # 할인율 적용
+                if char == '10%dc':
+                    result = current_val * 0.9
+                elif char == '20%dc':
+                    result = current_val * 0.8
+                elif char == '30%dc':
+                    result = current_val * 0.7
+                
+                self.expression = str(int(result)) # 정수형으로 저장
+                
+            except Exception:
+                self.expression = "에러"
+
         else:
             self.expression += str(char)
 
