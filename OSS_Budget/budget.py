@@ -24,4 +24,25 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
+    # 금액 기준 검색 메서드
+    def search_by_amount(self, target_amount, condition):
+        condition: 'up' (이상) 또는 'down' (이하)
+        filtered_expenses = []
+        
+        if condition == 'up':
+            # 이상 조건 필터링
+            filtered_expenses = [e for e in self.expenses if e.amount >= target_amount]
+            cond_text = "이상"
+        elif condition == 'down':
+            # 이하 조건 필터링
+            filtered_expenses = [e for e in self.expenses if e.amount <= target_amount]
+            cond_text = "이하"
+        
+        if not filtered_expenses:
+            print(f"\n{target_amount}원 {cond_text}의 지출 내역이 없습니다.\n")
+            return
 
+        print(f"\n[{target_amount}원 {cond_text} 지출 목록]")
+        for idx, e in enumerate(filtered_expenses, 1):
+            print(f"{idx}. {e}")
+        print()
