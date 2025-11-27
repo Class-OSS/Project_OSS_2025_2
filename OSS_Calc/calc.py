@@ -15,11 +15,10 @@ class Calculator:
 
         # 버튼 생성
         buttons = [
-            ['7', '8', '9', '/'],
-            ['4', '5', '6', '*'],
-            ['1', '2', '3', '-'],
-            ['0', '.', 'C', '+'],
-            ['=']
+            ['7', '8', '9', '/', 'C'],
+            ['4', '5', '6', '*', '('],
+            ['1', '2', '3', '-', ')'],
+            ['0', '.', 'i', '+', '=']
         ]
 
         for row in buttons:
@@ -39,7 +38,14 @@ class Calculator:
             self.expression = ""
         elif char == '=':
             try:
-                self.expression = str(eval(self.expression))
+                # 사용자가 입력한 'i'를 파이썬의 허수 단위 'j'로 변환
+                calc_expression = self.expression.replace('i', 'j')
+                
+                # eval()로 계산 
+                result = eval(calc_expression)
+                
+                # 결과에서 'j'를 다시 'i'로 변환하고, 괄호 제거 ( 파이썬은 괄호를 같이 출력 하기 때문 )
+                self.expression = str(result).replace('j', 'i').replace('(', '').replace(')', '')
             except Exception:
                 self.expression = "에러"
         else:
