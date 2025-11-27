@@ -1,4 +1,5 @@
 from budget import Budget
+from budget_gui import run_budget_gui
 
 
 def main():
@@ -23,11 +24,11 @@ def main():
             budget.add_expense(category, description, amount)
 
         elif choice == "2":
-            budget.list_expenses()
+            run_budget_gui(budget)
 
         elif choice == "3":
             budget.total_spent()
-
+            
         elif choice == "4":
             print("가계부를 종료합니다.")
             break
