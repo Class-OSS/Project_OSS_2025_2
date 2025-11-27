@@ -5,7 +5,7 @@ class Calculator:
     def __init__(self, root):
         self.root = root
         self.root.title("계산기")
-        self.root.geometry("300x400")
+        self.root.geometry("300x450")
 
         self.expression = ""
 
@@ -15,11 +15,10 @@ class Calculator:
 
         # 버튼 생성
         buttons = [
-            ['7', '8', '9', '/'],
-            ['4', '5', '6', '*'],
-            ['1', '2', '3', '-'],
-            ['0', '.', 'C', '+'],
-            ['=']
+            ['7', '8', '9', '/', '√'],
+            ['4', '5', '6', '*', 'x²'],
+            ['1', '2', '3', '-', 'xʸ'],
+            ['0', '.', 'C', '+', '='],
         ]
 
         for row in buttons:
@@ -37,6 +36,25 @@ class Calculator:
     def on_click(self, char):
         if char == 'C':
             self.expression = ""
+
+         # 제곱 기능
+        elif char == 'x²':
+            try:
+                self.expression = str(eval(self.expression) ** 2)
+            except:
+                self.expression = "에러"
+
+        # 제곱근
+        elif char == '√':
+            try:
+                self.expression = str(math.sqrt(eval(self.expression)))
+            except:
+                self.expression = "에러"
+
+        # 거듭제곱 xʸ 입력
+        elif char == 'xʸ':
+            self.expression += "**"
+
         elif char == '=':
             try:
                 self.expression = str(eval(self.expression))
