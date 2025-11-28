@@ -19,7 +19,7 @@ class Calculator:
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            ['=']
+            ['=', 'Prime']
         ]
 
         for row in buttons:
@@ -42,11 +42,28 @@ class Calculator:
                 self.expression = str(eval(self.expression))
             except Exception:
                 self.expression = "에러"
+        elif char == 'Prime':
+            try:
+                num = int(self.entry.get())
+                result = is_prime(num)
+                self.entry.delete(0,tk.END)
+                self.entry.insert(tk.END, str(result))
+            except:
+                self.entry.delete(0,tk.END)
+                self.entry.insert(tk.END, "에러")
         else:
             self.expression += str(char)
 
         self.entry.delete(0, tk.END)
         self.entry.insert(tk.END, self.expression)
 
+def is_prime(n):
+    """Check if a number is prime"""
+    if n <= 1:
+        return False
+        for i in range(2, int(n**0.5) + 1):
+            if n % i == 0:
+                return False
+        return True
 
 
