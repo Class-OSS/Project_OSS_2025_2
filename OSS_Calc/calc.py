@@ -15,6 +15,7 @@ class Calculator:
 
         # 버튼 생성
         buttons = [
+            ['HEX', 'BIN'],
             ['7', '8', '9', '/'],
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
@@ -40,6 +41,20 @@ class Calculator:
         elif char == '=':
             try:
                 self.expression = str(eval(self.expression))
+            except Exception:
+                self.expression = "에러"
+        #10진수->16진수        
+        elif char == 'HEX':
+            try:
+                result = eval(self.expression)
+                self.expression = hex(int(result))
+            except Exception:
+                self.expression = "에러"
+        #10진수->2진수
+        elif char == "BIN":
+            try:
+                result = eval(self.expression)
+                self.expression = bin(int(result))
             except Exception:
                 self.expression = "에러"
         else:
