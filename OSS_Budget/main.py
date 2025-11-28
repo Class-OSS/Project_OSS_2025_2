@@ -9,7 +9,8 @@ def main():
         print("1. 지출 추가")
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
-        print("4. 종료")
+        print("4. 가계부 예산 설정")
+        print("5. 종료")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -23,12 +24,20 @@ def main():
             budget.add_expense(category, description, amount)
 
         elif choice == "2":
-            budget.list_expenses()
+            budget.list_expenses() #소비 목록
 
         elif choice == "3":
-            budget.total_spent()
+            budget.total_spent() #총 소비
 
-        elif choice == "4":
+        elif choice == "4": #목표설정
+            try:
+                goal = int(input("이번 달 목표 금액(원): "))
+            except ValueError:
+                print("잘못된 금액입니다.\n")
+                continue
+            budget.goal_spend(goal)
+
+        elif choice == "5":
             print("가계부를 종료합니다.")
             break
 
