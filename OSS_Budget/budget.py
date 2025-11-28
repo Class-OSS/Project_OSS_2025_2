@@ -24,4 +24,29 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
+    def ggplot2(self):
+        if not self.expenses:
+            print("지출 내역이 없습니다.")
+            return
+
+        grouped = {}
+        for entry in self.expenses:
+            grouped[entry.category] = grouped.get(entry.category, 0) + entry.amount 
+
+        unit = 10000
+
+        print("\n[카테고리별 지출 그래프 (*=10000)]")
+
+        for key, val in grouped.items():
+            raw_bar = val // unit
+            bar_txt = "*" * int(raw_bar)
+
+            pretty_bar = ""
+            for i in range(0, len(bar_txt), 5):
+                pretty_bar += bar_txt[i:i+5] + " "
+            bar_txt = pretty_bar.strip()
+
+            print(f"{key:>8} | {bar_txt} {val}원")
+                 
+
 

@@ -9,7 +9,8 @@ def main():
         print("1. 지출 추가")
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
-        print("4. 종료")
+        print("4. 카테고리 별 지출 그래프")
+        print("5. 종료")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -29,9 +30,11 @@ def main():
             budget.total_spent()
 
         elif choice == "4":
+            budget.ggplot2()
+
+        elif choice == "5":
             print("가계부를 종료합니다.")
             break
-
         else:
             print("잘못된 선택입니다.\n")
 
