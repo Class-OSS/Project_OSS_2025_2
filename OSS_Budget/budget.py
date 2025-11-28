@@ -24,4 +24,18 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
+    def list_expenses_by_period(self, start_date, end_date):
+        """기간별 지출 조회"""
+        filtered = [e for e in self.expenses if start_date <= e.date <= end_date]
+
+        if not filtered:
+            print(f"\n{start_date} ~ {end_date} 사이 지출 내역이 없습니다.\n")
+            return
+
+        print(f"\n{start_date} ~ {end_date} 사이 지출 목록")
+        for idx, e in enumerate(filtered, 1):
+            print(f"{idx}. {e}")
+
+        total = sum(e.amount for e in filtered)
+        print(f"/n기간 내 총 지출: {total}원\n")
 
