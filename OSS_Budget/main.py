@@ -9,7 +9,8 @@ def main():
         print("1. 지출 추가")
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
-        print("4. 종료")
+        print("4. HTML 내보내기")
+        print("5. 종료")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -29,6 +30,10 @@ def main():
             budget.total_spent()
 
         elif choice == "4":
+            print("[HTML 리포트 내보내기]")
+            budget.export_to_html()
+
+        elif choice == "5":
             print("가계부를 종료합니다.")
             break
 
