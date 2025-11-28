@@ -19,8 +19,8 @@ class Calculator:
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            ['=']
-        ]
+            ['f', '=']
+            ]
 
         for row in buttons:
             frame = tk.Frame(root)
@@ -34,6 +34,14 @@ class Calculator:
                 )
                 btn.pack(side="left", expand=True, fill="both")
 
+    def cal_fibo(self, k):
+        if k <= 0:
+            return 0
+        elif k == 1 or k == 2:
+            return 1
+        else:
+            return self.cal_fibo(k-1) + self.cal_fibo(k-2)
+
     def on_click(self, char):
         if char == 'C':
             self.expression = ""
@@ -42,6 +50,16 @@ class Calculator:
                 self.expression = str(eval(self.expression))
             except Exception:
                 self.expression = "에러"
+        elif char == 'f':
+            try:
+                k = int(eval(self.expression))
+                if k < 0:
+                    self.expression = "음수의 값을 입력하였습니다."
+                else:
+                    result = self.cal_fibo(k)
+                    self.expression = str(result)
+            except Exception:
+                self.expression = "입력된 값이 잘못되었습니다."
         else:
             self.expression += str(char)
 
