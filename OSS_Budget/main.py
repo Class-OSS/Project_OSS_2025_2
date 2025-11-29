@@ -10,6 +10,7 @@ def main():
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
         print("4. 종료")
+        print("5. 카테고리로 검색")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -31,6 +32,10 @@ def main():
         elif choice == "4":
             print("가계부를 종료합니다.")
             break
+        
+        elif choice == "5":
+            category = input("검색할 카테고리 입력: ")
+            budget.search_by_category(category)
 
         else:
             print("잘못된 선택입니다.\n")

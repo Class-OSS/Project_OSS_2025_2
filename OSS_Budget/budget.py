@@ -24,4 +24,16 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
+    def search_by_category(self, category):
+        results = [e for e in self.expenses if e.category == category]
+
+        if not results:
+            print(f"'{category}' 카테고리에 해당하는 지출 내역이 없습니다.\n")
+            return
+
+        print(f"\n[{category} 지출 내역]")
+        for idx, e in enumerate(results, 1):
+            print(f"{idx}. {e}")
+        print()
+
 
