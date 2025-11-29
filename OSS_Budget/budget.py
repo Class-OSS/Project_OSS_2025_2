@@ -1,13 +1,17 @@
 import datetime
 from expense import Expense
+from exchange import Exchange
 
 class Budget:
     def __init__(self):
         self.expenses = []
 
-    def add_expense(self, category, description, amount):
+    def add_expense(self, category, description, amount, currency):
+        ex=Exchange()
         today = datetime.date.today().isoformat()
-        expense = Expense(today, category, description, amount)
+        after_calc_amount=ex.calc_excange(amount, currency)
+        expense = Expense(today, category, description, amount, currency)
+        expense.amount = after_calc_amount
         self.expenses.append(expense)
         print("지출이 추가되었습니다.\n")
 
@@ -23,5 +27,3 @@ class Budget:
     def total_spent(self):
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
-
-

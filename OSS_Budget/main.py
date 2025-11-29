@@ -2,6 +2,7 @@ from budget import Budget
 
 
 def main():
+    currency_suffix=['원','달러','유로','엔','위안']
     budget = Budget()
 
     while True:
@@ -15,13 +16,17 @@ def main():
         if choice == "1":
             category = input("카테고리 (예: 식비, 교통 등): ")
             description = input("설명: ")
+            while True:
+                currency = int(input("적용할 화폐단위의 변호를 입력해주세요. [0:KRW, 1:USD, 2:EUR, 3:JPY, 4:CNY] : "))
+                if(currency >= 0 and currency <= 4):
+                    break
             try:
-                amount = int(input("금액(원): "))
+                amount = int(input(f"금액({currency_suffix[currency]}): "))
             except ValueError:
                 print("잘못된 금액입니다.\n")
                 continue
-            budget.add_expense(category, description, amount)
-
+            budget.add_expense(category, description, amount, currency)
+           
         elif choice == "2":
             budget.list_expenses()
 
