@@ -24,4 +24,13 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
+    def show_labor_value(self):
+        total = sum(e.amount for e in self.expenses)
+        
+        min_wage = 10320
+        work_hours = total / min_wage
+        
+        print(f"총 지출: {total}원")
+        print(f"최저시급 기준 약 {work_hours:.2f}시간 일해야 합니다.")
+        print("돈을 아껴 씁시다! \n")
 
