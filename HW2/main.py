@@ -1,5 +1,9 @@
 from budget import Budget
+<<<<<<< HEAD
 from datetime import datetime
+=======
+
+>>>>>>> be1efd5 ([기능추가] 지출 카테고리별 캐시백 기능 추가)
 
 def main():
     budget = Budget()
@@ -9,8 +13,13 @@ def main():
         print("1. 지출 추가")
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
+<<<<<<< HEAD
         print("4. 캐시백 총액 확인하기")
         print("5. 가계부 종료")
+=======
+        print("4. 캐시백 확인하기")
+        print("5. 종료")
+>>>>>>> be1efd5 ([기능추가] 지출 카테고리별 캐시백 기능 추가)
         choice = input("선택 > ")
 
         if choice == "1":
