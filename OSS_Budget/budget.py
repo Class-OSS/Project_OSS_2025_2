@@ -23,5 +23,20 @@ class Budget:
     def total_spent(self):
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
+    
+    def total_month_spent(self):
+        if (not self.expenses):
+            print("지출 내역이 없습니다.\n")
+            return
+        
+        today = datetime.date.today()
+        current_month = today.strftime("%Y-%m")
+        total = 0
 
+        for expense in self.expenses:
+            if (expense.date.startswith(current_month)):
+                total += expense.amount
+
+        print("\n[이번 달 지출]")
+        print(f"{current_month} 총 지출: {total}원\n")
 
