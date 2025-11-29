@@ -28,7 +28,7 @@ class Budget:
         print(f"총 지출: {total}원\n")
 
     # ================================
-    #   ✨카테고리별 지출 Top3 기능 추가✨
+    #   카테고리별 지출 Top3 기능 추가
     # ================================
     def get_monthly_category_top3(self, year=None, month=None):
         """
