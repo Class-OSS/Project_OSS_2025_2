@@ -25,3 +25,7 @@ class Budget:
         print(f"총 지출: {total}원\n")
 
 
+    def total_spent_usd(self, rate=1400):
+        total = sum(e.amount for e in self.expenses)
+        usd = total / rate
+        print(f"총 지출(달러 환산): {usd:.2f} USD (환율: 1달러={rate}원)\n")
