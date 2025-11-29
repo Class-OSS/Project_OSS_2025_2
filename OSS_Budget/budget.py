@@ -24,4 +24,17 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
+    def spent_rank(self):
+        if not self.expenses:
+            print("지출 내역이 없습니다.\n")
+            return
+
+        #e.amount 기준으로 내림차순 정렬
+        sorted_expenses = sorted(self.expenses, key=lambda x: x.amount, reverse=True)
+
+        #출력
+        print("\n[지출 목록 순위]")
+        for idx, e in enumerate(sorted_expenses, 1): #enumerate가 알아서 리스트 크기 확인함, len()과 인덱스를 안써도 됨.
+            print(f"{idx}위: [{e.date}] {e.category} - {e.description} ({e.amount}원)")
+        print()
 
