@@ -9,7 +9,8 @@ def main():
         print("1. 지출 추가")
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
-        print("4. 종료")
+        print("4. 적금 총액 보기")
+        print("5. 종료")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -27,8 +28,17 @@ def main():
 
         elif choice == "3":
             budget.total_spent()
-
+        
         elif choice == "4":
+            try:
+                monthly_amount = int (input("월 적금액(원):"))
+                months = int(input("적금 기간(개월):"))
+            except ValueError:
+                print("잘못된 입력입니다")
+                continue
+            budget.total_saving(monthly_amount,months)
+
+        elif choice == "5":
             print("가계부를 종료합니다.")
             break
 
