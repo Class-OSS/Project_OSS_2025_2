@@ -10,6 +10,7 @@ def main():
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
         print("4. 종료")
+        print("5.월별 카테고리별 지출 순위 출력")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -31,6 +32,16 @@ def main():
         elif choice == "4":
             print("가계부를 종료합니다.")
             break
+
+        elif choice == "5":
+            try:
+                year = int(input("연도 입력 (예: 2025): "))
+                month = int(input("월 입력 (예: 11): "))
+            except ValueError:
+                print("잘못된 입력입니다.\n")
+                continue
+
+            budget.monthly_category_ranking(year, month)
 
         else:
             print("잘못된 선택입니다.\n")
