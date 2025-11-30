@@ -47,6 +47,55 @@ class Calculator:
 
         self.entry.delete(0, tk.END)
         self.entry.insert(tk.END, self.expression)
+def continuous_calc(expression: str):
+    """
+    문자열로 된 수식을 계산하는 함수
+    예: "3 + 5 * 2 - 4" → 9
+    """
 
+    # 1) 공백 제거
+    expression = expression.replace(" ", "")
 
+    # 2) 숫자와 연산자를 토큰 분리
+    tokens = []
+    num = ""
+    for ch in expression:
+        if ch.isdigit():
+            num += ch
+        else:
+            tokens.append(int(num))
+            tokens.append(ch)
+            num = ""
+    tokens.append(int(num))
 
+    # 3) 1차: *, / 먼저 계산
+    stack = []
+    i = 0
+    while i < len(tokens):
+        if tokens[i] == '*':
+            prev = stack.pop()
+            next_num = tokens[i+1]
+            stack.append(prev * next_num)
+            i += 2
+        elif tokens[i] == '/':
+            prev = stack.pop()
+            next_num = tokens[i+1]
+            stack.append(prev / next_num)
+            i += 2
+        else:
+            stack.append(tokens[i])
+            i += 1
+
+    # 4) 2차: +, - 계산
+    result = stack[0]
+    i = 1
+    while i < len(stack):
+        op = stack[i]
+        num = stack[i+1]
+        if op == '+':
+            result += num
+        else:
+            result -= num
+        i += 2
+
+    return result
