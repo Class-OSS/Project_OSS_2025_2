@@ -1,5 +1,5 @@
 import tkinter as tk
-
+import math
 
 class Calculator:
     def __init__(self, root):
@@ -19,7 +19,7 @@ class Calculator:
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            ['=']
+            ['!', '=']
         ]
 
         for row in buttons:
@@ -34,19 +34,28 @@ class Calculator:
                 )
                 btn.pack(side="left", expand=True, fill="both")
 
+
+
+
     def on_click(self, char):
         if char == 'C':
             self.expression = ""
+        
         elif char == '=':
             try:
                 self.expression = str(eval(self.expression))
             except Exception:
                 self.expression = "에러"
+        
+        elif char == '!':
+            try:
+                val = int(eval(self.expression))
+                self.expression = str(math.factorial(val))
+            except Exception:
+                self.expression = "에러"
+        
         else:
             self.expression += str(char)
 
         self.entry.delete(0, tk.END)
         self.entry.insert(tk.END, self.expression)
-
-
-
