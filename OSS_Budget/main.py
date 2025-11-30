@@ -1,4 +1,5 @@
 from budget import Budget
+import datetime 
 
 
 def main():
@@ -7,9 +8,10 @@ def main():
     while True:
         print("==== 간단 가계부 ====")
         print("1. 지출 추가")
-        print("2. 지출 목록 보기")
+        print("2. 지출 목록 보기 (전체)")
         print("3. 총 지출 보기")
-        print("4. 종료")
+        print("4. 기간별 지출 목록 보기") 
+        print("5. 종료")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -29,6 +31,15 @@ def main():
             budget.total_spent()
 
         elif choice == "4":
+            start_date_str = input("시작일 (yymmdd): ")
+            end_date_str = input("종료일 (yymmdd): ")
+            
+            if len(start_date_str) == 6 and len(end_date_str) == 6:
+                budget.list_expenses_by_date_range(start_date_str, end_date_str)
+            else:
+                print("날짜는 yymmdd 형식으로 입력해야 합니다.\n")
+
+        elif choice == "5":
             print("가계부를 종료합니다.")
             break
 
