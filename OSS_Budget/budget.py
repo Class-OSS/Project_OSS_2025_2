@@ -1,5 +1,6 @@
 import datetime
 from expense import Expense
+from collections import defaultdict
 
 class Budget:
     def __init__(self):
@@ -23,5 +24,17 @@ class Budget:
     def total_spent(self):
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
+
+    def monthly_summary(self):
+        summary = defaultdict(int)
+        for e in self.expenses:
+            date = datetime.datetime.strptime(e.date, "%Y-%m-%d")
+            key = f"{date.year}-{date.month:02d}"
+            summary[key] += e.amount
+
+        print("\n[월별 지출 요약]")
+        for month, total in sorted(summary.items()):
+            print(f"{month}: {total}원")
+        print()
 
 
