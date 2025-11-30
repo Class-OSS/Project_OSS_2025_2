@@ -24,4 +24,26 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
+    def modify_expense(self, index, sub_choice, category=None, description=None, amount=0):
+        idx = index - 1
+        
+        if not (0 <= idx < len(self.expenses)):
+            print(("잘못된 지출 번호입니다.\n"))
+            return
+        
+        if sub_choice == "1":
+            target = self.expenses[idx]
+            target.category = category
+            target.description = description
+            target.amount = amount
+            print(f"{index}번 항목이 수정되었습니다.\n")
+
+        elif sub_choice == "2":
+            self.expenses.pop(idx)
+            print(f"{index}번 항목이 삭제되었습니다.\n")
+
+        else:   
+            print("잘못된 번호입니다.\n")
+
+
 
