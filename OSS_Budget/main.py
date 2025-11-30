@@ -9,7 +9,9 @@ def main():
         print("1. 지출 추가")
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
-        print("4. 종료")
+        print("4. 자산 추가")
+        print("5. 자산 확인")
+        print("6. 종료")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -29,6 +31,19 @@ def main():
             budget.total_spent()
 
         elif choice == "4":
+            category = input("자산 종류 (예: 현금, 카드, 저축 등): ")
+            description = input("설명(용돈, 월급 등): ")
+            try:
+                amount = int(input("금액(원): "))
+            except ValueError:
+                print("잘못된 금액입니다.\n")
+                continue
+            budget.add_asset(category, description, amount)
+            
+        elif choice == "5":
+            budget.total_asset()
+
+        elif choice == "6":
             print("가계부를 종료합니다.")
             break
 
