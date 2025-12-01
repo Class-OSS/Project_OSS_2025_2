@@ -1,4 +1,5 @@
 import tkinter as tk
+import math
 
 
 class Calculator:
@@ -19,7 +20,7 @@ class Calculator:
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            ['=']
+            ['=', '√', 'x²']
         ]
 
         for row in buttons:
@@ -42,11 +43,41 @@ class Calculator:
                 self.expression = str(eval(self.expression))
             except Exception:
                 self.expression = "에러"
+        elif char == '√':
+            try:
+                num = float(self.entry.get())
+                result = sqrt_number(num)
+                self.entry.delete(0, tk.END)
+                self.entry.insert(tk.END, str(result))
+                self.expression = str(result)
+            except Exception:
+                self.entry.delete(0, tk.END)
+                self.entry.insert(tk.END, "에러")
+                self.expression = ""
+        elif char == 'x²':
+            try:
+                num = float(self.entry.get())
+                result = square_number(num)
+                self.entry.delete(0, tk.END)
+                self.entry.insert(tk.END, str(result))
+                self.expression = str(result)
+            except Exception:
+                self.entry.delete(0, tk.END)
+                self.entry.insert(tk.END, "에러")
+                self.expression = ""
         else:
             self.expression += str(char)
 
         self.entry.delete(0, tk.END)
         self.entry.insert(tk.END, self.expression)
+def sqrt_number(n):
+    """Return square root of a number"""
+    if n < 0:
+        raise ValueError("음수의 제곱근은 계산할 수 없습니다.")
+        return math.sqrt(n)
+def square_number(n):
+    """Return square of a number"""
+    return n ** 2
 
 
 
