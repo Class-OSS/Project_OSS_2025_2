@@ -6,8 +6,10 @@ class Calculator:
         self.root = root
         self.root.title("계산기")
         self.root.geometry("300x400")
+        
 
         self.expression = ""
+        self.last_result = None
 
         # 입력창
         self.entry = tk.Entry(root, font=("Arial", 24), justify="right")
@@ -19,7 +21,7 @@ class Calculator:
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            ['=']
+            ['AC', '=']
         ]
 
         for row in buttons:
@@ -37,6 +39,9 @@ class Calculator:
     def on_click(self, char):
         if char == 'C':
             self.expression = ""
+	elif char == 'AC':
+	    self.expression = "" 
+            self.last_result = None
         elif char == '=':
             try:
                 self.expression = str(eval(self.expression))
@@ -47,6 +52,7 @@ class Calculator:
 
         self.entry.delete(0, tk.END)
         self.entry.insert(tk.END, self.expression)
+
 
 
 
