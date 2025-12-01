@@ -10,6 +10,7 @@ def main():
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
         print("4. 종료")
+	print("5. 지난달과 차액 계산")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -31,6 +32,28 @@ def main():
         elif choice == "4":
             print("가계부를 종료합니다.")
             break
+	 elif choice == "5":  # ★ 추가: 지난달 대비 차액 계산
+            try:
+                last_month = int(input("지난달 총 지출(원): "))
+            except ValueError:
+                print("잘못된 금액입니다.\n")
+                continue
+
+            current_total = sum(e.amount for e in budget.expenses)
+            diff = current_total - last_month
+
+            if diff > 0:
+                print(
+                    f"이번달이 지난달보다 {diff:,}원 더 썼습니다. "
+                    f"(이번달 {current_total:,}원 / 지난달 {last_month:,}원)\n"
+                )
+            elif diff < 0:
+                print(
+                    f"이번달이 지난달보다 {abs(diff):,}원 덜 썼습니다. "
+                    f"(이번달 {current_total:,}원 / 지난달 {last_month:,}원)\n"
+                )
+            else:
+                print(f"두 달의 지출이 같습니다. (각 {current_total:,}원)\n")
 
         else:
             print("잘못된 선택입니다.\n")
