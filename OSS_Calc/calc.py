@@ -1,5 +1,5 @@
 import tkinter as tk
-
+import math 
 
 class Calculator:
     def __init__(self, root):
@@ -15,6 +15,7 @@ class Calculator:
 
         # 버튼 생성
         buttons = [
+            ['^2', '**', 'sqrt', 'log'],
             ['7', '8', '9', '/'],
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
@@ -42,11 +43,33 @@ class Calculator:
                 self.expression = str(eval(self.expression))
             except Exception:
                 self.expression = "에러"
+        elif char in ('^2', 'sqrt', 'log'):
+            try:
+                value = float(self.expression)
+                
+                if char == '^2':
+                    self.expression = str(value ** 2)
+                elif char == 'sqrt':
+                    if value < 0:
+                        self.expression = "음수오류"
+                    else:
+                        self.expression = str(math.sqrt(value))
+                elif char == 'log':
+                    if value <= 0:
+                        self.expression = "범위오류"
+                    else:
+                        self.expression = str(math.log10(value))
+                        
+            except ValueError:
+                self.expression = "숫자입력오류"
+            except Exception:
+                self.expression = "계산에러"
+                
+        elif char == '**':
+            self.expression += str(char)
+            
         else:
             self.expression += str(char)
 
         self.entry.delete(0, tk.END)
         self.entry.insert(tk.END, self.expression)
-
-
-
