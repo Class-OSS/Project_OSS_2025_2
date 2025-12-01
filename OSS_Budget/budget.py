@@ -24,4 +24,22 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
+    def group_by_category(self):
+        if not self.expenses:
+            print("지출 내역이 없습니다.\n")
+            return
+
+        stats = {}
+        for expense in self.expenses:
+            # 카테고리가 이미 딕셔너리에 있으면 금액 더하기
+            if expense.category in stats:
+                stats[expense.category] += expense.amount
+            # 없으면 새로 생성
+            else:
+                stats[expense.category] = expense.amount
+
+        print("\n[카테고리별 지출 통계]")
+        for category, total in stats.items():
+            print(f"- {category}: {total}원")
+        print()
 
