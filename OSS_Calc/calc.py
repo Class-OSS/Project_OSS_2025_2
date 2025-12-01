@@ -1,6 +1,5 @@
 import tkinter as tk
 
-
 class Calculator:
     def __init__(self, root):
         self.root = root
@@ -13,13 +12,13 @@ class Calculator:
         self.entry = tk.Entry(root, font=("Arial", 24), justify="right")
         self.entry.pack(fill="both", ipadx=8, ipady=15, padx=10, pady=10)
 
-        # 버튼 생성
+        # 버튼 생성 (여기 수정됨: 마지막 줄에 '%' 추가)
         buttons = [
             ['7', '8', '9', '/'],
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            ['=']
+            ['%', '=']  # 기존 ['='] 에서 ['%', '='] 로 변경
         ]
 
         for row in buttons:
@@ -39,6 +38,7 @@ class Calculator:
             self.expression = ""
         elif char == '=':
             try:
+                # eval 함수가 % 연산도 자동으로 처리함
                 self.expression = str(eval(self.expression))
             except Exception:
                 self.expression = "에러"
@@ -47,6 +47,3 @@ class Calculator:
 
         self.entry.delete(0, tk.END)
         self.entry.insert(tk.END, self.expression)
-
-
-
