@@ -24,4 +24,10 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
+    def total_saving(self,monthly_amount,months):
+        total = monthly_amount * months
+        print(f"{months}개월 후 적금의 총액 : {total}원")
+        return total
+
+    
 
