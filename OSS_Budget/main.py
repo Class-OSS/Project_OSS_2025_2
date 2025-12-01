@@ -1,3 +1,5 @@
+from budget_csv import budget_as_csv
+
 from budget import Budget
 
 
@@ -9,7 +11,8 @@ def main():
         print("1. 지출 추가")
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
-        print("4. 종료")
+        print("4. CSV로 내보내기")
+        print("5. 종료하기")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -28,7 +31,11 @@ def main():
         elif choice == "3":
             budget.total_spent()
 
-        elif choice == "4":
+        elif choice == "4":  
+            result = budget_as_csv(budget.expenses)
+            print("CSV 저장 완료:", result, "\n")
+
+        elif choice == "5":
             print("가계부를 종료합니다.")
             break
 
