@@ -13,6 +13,10 @@ class Calculator:
         self.entry = tk.Entry(root, font=("Arial", 24), justify="right")
         self.entry.pack(fill="both", ipadx=8, ipady=15, padx=10, pady=10)
 
+        # 키보드 입력
+        self.root.bind("<Key>", self.on_key)
+        self.entry.focus_set()
+
         # 버튼 생성
         buttons = [
             ['7', '8', '9', '/'],
@@ -48,5 +52,18 @@ class Calculator:
         self.entry.delete(0, tk.END)
         self.entry.insert(tk.END, self.expression)
 
+    def on_key(self, event):
+        ch = event.char
 
+        # 숫자 / 소수점 / 연산자
+        if ch in "0123456789.+-*/":
+            self.on_click(ch)
+
+        # Enter 또는 숫자 키패드 Enter → '='
+        elif event.keysym in ("Return", "KP_Enter"):
+            self.on_click('=')
+
+        # Esc → 전체 지우기(C)
+        elif event.keysym == "Escape":
+            self.on_click('C')
 
