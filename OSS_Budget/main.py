@@ -9,10 +9,12 @@ def main():
         print("1. 지출 추가")
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
-        print("4. 종료")
+        print("4. 카테고리별 통계")  # <--- 메뉴 추가
+        print("5. 종료")            # <--- 번호 변경
         choice = input("선택 > ")
 
         if choice == "1":
+            # (기존 코드 유지)
             category = input("카테고리 (예: 식비, 교통 등): ")
             description = input("설명: ")
             try:
@@ -28,13 +30,15 @@ def main():
         elif choice == "3":
             budget.total_spent()
 
-        elif choice == "4":
+        elif choice == "4":       # <--- 기능 연결 추가
+            budget.group_by_category()
+
+        elif choice == "5":       # <--- 종료 번호 변경
             print("가계부를 종료합니다.")
             break
 
         else:
             print("잘못된 선택입니다.\n")
-
 
 if __name__ == "__main__":
     main()
