@@ -117,3 +117,34 @@ class Budget:
         for idx, e in enumerate(monthly_expenses, 1):
             print(f"{idx}. {e}")
         print(f"\n{month} 월 총 지출: {total}원\n")
+
+    def view_by_category(self):
+        if not self.expenses:
+            print("지출 내역이 없습니다.\n")
+            return
+
+        categories = sorted(set(e.category for e in self.expenses))
+        print("\n[등록된 카테고리]")
+        for c in categories:
+            print(f"- {c}")
+        print()
+
+        category = input("조회할 카테고리 이름을 입력하세요 (예: 식비): ").strip()
+        if not category:
+            print("카테고리를 입력하지 않았습니다.\n")
+            return
+
+        filtered = [e for e in self.expenses if e.category == category]
+
+        if not filtered:
+            print(f"'{category}' 카테고리의 지출 내역이 없습니다.\n")
+            return
+
+        print(f"\n[{category} 카테고리 지출 내역]")
+        total = 0
+        for idx, e in enumerate(filtered, 1):
+            print(f"{idx}. {e}")
+            total += e.amount
+
+        print(f"\n{category} 카테고리 총 지출: {total}원\n")
+

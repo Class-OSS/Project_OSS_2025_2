@@ -13,6 +13,7 @@ def main():
         print("5. 지출 수정")
         print("6. 지출 삭제")
         print("7. 월별 지출 합계 보기")
+        print("8. 카테고리별 지출 보기")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -43,6 +44,9 @@ def main():
 
         elif choice == "7":
             budget.total_by_month()
+
+        elif choice == "8":
+            budget.view_by_category()
             
         else:
             print("잘못된 선택입니다.\n")
