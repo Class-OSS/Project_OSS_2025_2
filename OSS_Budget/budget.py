@@ -23,5 +23,22 @@ class Budget:
     def total_spent(self):
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
+ 
+    def list_over_threshold(self, threshold):
+        """threshold 이상인 지출만 출력하는 함수"""
+        if not self.expenses:
+            print("지출 내역이 없습니다.\n")
+            return
+
+        filtered = [e for e in self.expenses if e.amount >= threshold]
+
+        if not filtered:
+            print(f"{threshold}원 이상의 지출 내역이 없습니다.\n")
+            return
+
+        print(f"\n[{threshold}원 이상 지출 내역]")
+        for idx, e in enumerate(filtered, 1):
+            print(f"{idx}. {e}")
+        print()
 
 
