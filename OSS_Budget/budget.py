@@ -94,3 +94,26 @@ class Budget:
         else:
             print("삭제를 취소했습니다.\n")
 
+    def total_by_month(self):
+        if not self.expenses:
+            print("지출 내역이 없습니다.\n")
+            return
+
+        month = input("조회할 월을 입력하세요 (예: 2025-12): ").strip()
+
+        if len(month) != 7 or month[4] != '-':
+            print("형식이 올바르지 않습니다. 예: 2025-12\n")
+            return
+
+        monthly_expenses = [e for e in self.expenses if e.date.startswith(month)]
+
+        if not monthly_expenses:
+            print(f"{month} 월의 지출 내역이 없습니다.\n")
+            return
+
+        total = sum(e.amount for e in monthly_expenses)
+
+        print(f"\n[{month} 월 지출 내역]")
+        for idx, e in enumerate(monthly_expenses, 1):
+            print(f"{idx}. {e}")
+        print(f"\n{month} 월 총 지출: {total}원\n")
