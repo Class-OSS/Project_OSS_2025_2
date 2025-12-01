@@ -8,8 +8,8 @@ def main():
         print("1. 지출 추가")
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
-        print("4. 요일별 지출 보기")  # 메뉴 추가
-        print("5. 종료")        # 번호 변경
+        print("4. 요일별 지출 보기")  # 메뉴 추가.
+        print("5. 종료")        # 번호 변경.
         choice = input("선택 > ")
 
         if choice == "1":
