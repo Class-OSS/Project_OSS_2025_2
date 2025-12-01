@@ -9,7 +9,8 @@ def main():
         print("1. 지출 추가")
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
-        print("4. 종료")
+        print("4. 가장 많이 쓴 카테고리 보기")  # 새 기능 메뉴
+        print("5. 종료")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -29,6 +30,10 @@ def main():
             budget.total_spent()
 
         elif choice == "4":
+            # 가장 많이 지출한 카테고리 출력
+            budget.get_max_category()
+
+        elif choice == "5":
             print("가계부를 종료합니다.")
             break
 
