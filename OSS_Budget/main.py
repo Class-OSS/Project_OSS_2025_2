@@ -11,6 +11,10 @@ def main():
         print("3. 총 지출 보기")
         print("4. 종료")
         print("5. 지출 삭제")
+        print("6. 저축 목표 설정")
+        print("7. 저축 입력")
+        print("8. 저축 현황 보기")
+
         choice = input("선택 > ")
 
         if choice == "1":
@@ -41,7 +45,16 @@ def main():
             except ValueError:
                 print("잘못된 입력입니다.\n")
 
+        elif choice == "6":
+              goal = int(input("목표 금액 입력 > "))
+              budget.set_goal(goal)
 
+        elif choice == "7":
+             amount = int(input("저축 금액 입력 > "))
+             budget.add_saving(amount)
+
+        elif choice == "8":
+               budget.show_goal_status()
         else:
             print("잘못된 선택입니다.\n")
 
