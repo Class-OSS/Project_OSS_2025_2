@@ -1,5 +1,42 @@
 import tkinter as tk
 
+def prime_factorization(n):
+    #문자열->정수
+    try:
+        n = int(n)
+    except ValueError:
+        return "에러: 정수만"
+        
+    if n <= 1:
+        return "에러: 1보다 큰 정수"
+    
+    factors = {}
+    
+    d = 2
+    while n % d == 0:
+        factors[d] = factors.get(d, 0) + 1
+        n //= d
+        
+    d = 3
+    while d * d <= n:
+        while n % d == 0:
+            factors[d] = factors.get(d, 0) + 1
+            n //= d
+        d += 2
+        
+    if n > 1:
+        factors[n] = factors.get(n, 0) + 1
+
+    # 결과를 문자열으로
+    result = []
+    for base, exponent in sorted(factors.items()):
+        if exponent == 1:
+            result.append(str(base))
+        else:
+            result.append(f"{base}^{exponent}")
+            
+    return " * ".join(result)
+
 
 class Calculator:
     def __init__(self, root):
@@ -19,7 +56,7 @@ class Calculator:
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            ['=']
+            ['=', 'PF'] 
         ]
 
         for row in buttons:
@@ -37,6 +74,17 @@ class Calculator:
     def on_click(self, char):
         if char == 'C':
             self.expression = ""
+        elif char == 'PF': 
+            try:
+                result = prime_factorization(self.expression)
+                
+                if result.startswith("에러"):
+                    self.expression = result
+                else:
+                    self.expression = result
+                    
+            except Exception:
+                self.expression = "에러"
         elif char == '=':
             try:
                 self.expression = str(eval(self.expression))
@@ -47,6 +95,3 @@ class Calculator:
 
         self.entry.delete(0, tk.END)
         self.entry.insert(tk.END, self.expression)
-
-
-
