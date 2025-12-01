@@ -23,5 +23,23 @@ class Budget:
     def total_spent(self):
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
+        
+    def category_stats(self):
+        if not self.expenses:
+            print("지출 기록이 없습니다.\n")
+            return
+        from collections import defaultdict
+        stats = defaultdict(int)
+        
+        for e in self.expenses:
+            stats[e.category] += e.amount
+            
+            print("\n[카테고리별 지출]")
+            for cat, amount in stats.items():
+                print(f"- {cat}: {amount}원")
+                print()
+
+
+
 
 
