@@ -1,52 +1,50 @@
 import tkinter as tk
+from tkinter import messagebox
+import math
 
-
-class Calculator:
+class CylinderVolumeCalculator:
     def __init__(self, root):
         self.root = root
-        self.root.title("계산기")
-        self.root.geometry("300x400")
+        self.root.title("원기둥 부피 계산기")
+        self.root.geometry("320x250")
 
-        self.expression = ""
+        # 반지름 입력
+        tk.Label(root, text="반지름 (r)", font=("Arial", 14)).pack(pady=5)
+        self.radius_entry = tk.Entry(root, font=("Arial", 18), justify="center")
+        self.radius_entry.pack(ipadx=5, ipady=3)
 
-        # 입력창
-        self.entry = tk.Entry(root, font=("Arial", 24), justify="right")
-        self.entry.pack(fill="both", ipadx=8, ipady=15, padx=10, pady=10)
+        # 높이 입력
+        tk.Label(root, text="높이 (h)", font=("Arial", 14)).pack(pady=5)
+        self.height_entry = tk.Entry(root, font=("Arial", 18), justify="center")
+        self.height_entry.pack(ipadx=5, ipady=3)
 
-        # 버튼 생성
-        buttons = [
-            ['7', '8', '9', '/'],
-            ['4', '5', '6', '*'],
-            ['1', '2', '3', '-'],
-            ['0', '.', 'C', '+'],
-            ['=']
-        ]
+        # 계산 버튼
+        calc_btn = tk.Button(root, text="부피 계산", font=("Arial", 16), command=self.calculate_volume)
+        calc_btn.pack(pady=15)
 
-        for row in buttons:
-            frame = tk.Frame(root)
-            frame.pack(expand=True, fill="both")
-            for char in row:
-                btn = tk.Button(
-                    frame,
-                    text=char,
-                    font=("Arial", 18),
-                    command=lambda ch=char: self.on_click(ch)
-                )
-                btn.pack(side="left", expand=True, fill="both")
+        # 결과 출력
+        self.result_label = tk.Label(root, text="", font=("Arial", 16))
+        self.result_label.pack()
 
-    def on_click(self, char):
-        if char == 'C':
-            self.expression = ""
-        elif char == '=':
-            try:
-                self.expression = str(eval(self.expression))
-            except Exception:
-                self.expression = "에러"
-        else:
-            self.expression += str(char)
+        # Enter 키 둘 다 지원
+        root.bind("<Return>", self.calculate_volume_event)
 
-        self.entry.delete(0, tk.END)
-        self.entry.insert(tk.END, self.expression)
+    # Enter 키용
+    def calculate_volume_event(self, event):
+        self.calculate_volume()
 
+    def calculate_volume(self):
+        try:
+            r = float(self.radius_entry.get())
+            h = float(self.height_entry.get())
 
+            volume = math.pi * (r ** 2) * h
 
+            self.result_label.config(text=f"부피: {volume:.3f}")
+        except ValueError:
+            messagebox.showerror("입력 오류", "숫자를 정확히 입력하세요!")
+
+# 실행
+root = tk.Tk()
+app = CylinderVolumeCalculator(root)
+root.mainloop()
