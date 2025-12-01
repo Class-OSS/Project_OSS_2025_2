@@ -4,7 +4,7 @@ from expense import Expense
 class Budget:
     def __init__(self):
         self.expenses = []
-
+    
     def add_expense(self, category, description, amount):
         today = datetime.date.today().isoformat()
         expense = Expense(today, category, description, amount)
@@ -24,4 +24,6 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
+    def isEmpty(self) : return not self.expenses
 
+    def time(self) : return datetime.date.today().isoformat()
