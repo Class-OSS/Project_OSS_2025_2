@@ -8,3 +8,11 @@ class Expense:
 
     def __str__(self):
         return f"[{self.date}] {self.category} - {self.description}: {self.amount}원"
+
+    def to_dict(self):
+        return {
+            "date": self.date,
+            "category": self.category,
+            "description": self.description,
+            "amount": self.amount
+        }
