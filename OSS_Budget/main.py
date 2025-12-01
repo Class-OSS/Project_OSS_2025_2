@@ -49,12 +49,7 @@ def main():
                     except ValueError:
                         print("숫자를 입력하세요")
                         continue
-#
-#                    if not choice.isdigit():
-#                        print("숫자를 입력하세요")
-#                        print("- - - - - - - - - - - - - - - - - - -")
-#                        continue
-#
+
                     choice = int(choice) - 1
                     if choice < 0 or choice >= len(budget.expenses):
                         choice = 0
