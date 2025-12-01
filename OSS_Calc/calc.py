@@ -19,7 +19,7 @@ class Calculator:
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            ['=', 'e'] #지수함수 추가
+            ['=', 'e', '←'] #지수함수, 지우기 추가
         ]
 
         for row in buttons:
@@ -46,7 +46,8 @@ class Calculator:
                 self.expression = str(eval(self.expression))
             except Exception:
                 self.expression = "에러"
-            
+        elif char=='←':
+            self.expression=self.expression[:-1]
         else:
             self.expression += str(char)
             
