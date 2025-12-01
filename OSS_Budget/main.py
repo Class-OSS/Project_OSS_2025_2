@@ -1,6 +1,5 @@
 from budget import Budget
 
-
 def main():
     budget = Budget()
 
@@ -9,7 +8,10 @@ def main():
         print("1. 지출 추가")
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
-        print("4. 종료")
+        print("4. 요일별 지출 패턴 분석")
+        print("5. 연속 소비일(Streak) 분석")
+        print("6. 종료")
+
         choice = input("선택 > ")
 
         if choice == "1":
@@ -20,6 +22,7 @@ def main():
             except ValueError:
                 print("잘못된 금액입니다.\n")
                 continue
+
             budget.add_expense(category, description, amount)
 
         elif choice == "2":
@@ -29,6 +32,12 @@ def main():
             budget.total_spent()
 
         elif choice == "4":
+            budget.analyze_weekday_spending()
+
+        elif choice == "5":
+            budget.analyze_spending_streak()
+
+        elif choice == "6":
             print("가계부를 종료합니다.")
             break
 
