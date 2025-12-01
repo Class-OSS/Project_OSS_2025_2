@@ -34,6 +34,10 @@ class Calculator:
                 )
                 btn.pack(side="left", expand=True, fill="both")
 
+        # 입력창에 키보드 입력 이벤트를 연결
+        self.entry.bind('<Key>', self.press_key)
+        self.root.bind('<Key>', self.press_key)
+
     def on_click(self, char):
         if char == 'C':
             self.expression = ""
@@ -48,5 +52,12 @@ class Calculator:
         self.entry.delete(0, tk.END)
         self.entry.insert(tk.END, self.expression)
 
-
-
+    # 키보드로 입력하는 기능 
+    def press_key(self, event):
+        if event.char.isdigit() or event.char in '+-*/.':
+            self.on_click(event.char)
+        elif event.keysym == "Return":
+            self.on_click('=')
+        elif event.keysym == "BackSpace":
+            self.on_click('C')
+        return "break" 
