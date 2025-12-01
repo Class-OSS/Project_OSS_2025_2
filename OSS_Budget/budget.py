@@ -52,5 +52,3 @@ class Budget:
             print(e)
         print()
 
-
-
