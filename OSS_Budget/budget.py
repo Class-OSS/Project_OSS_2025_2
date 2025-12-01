@@ -1,5 +1,6 @@
 import datetime
 from expense import Expense
+from collections import defaultdict 
 
 class Budget:
     def __init__(self):
@@ -30,7 +31,6 @@ class Budget:
             return
         
         try:
-            # 입력받은 'yymmdd' 문자열 변환
             start_date = datetime.datetime.strptime(start_date_str, "%y%m%d").date()
             end_date = datetime.datetime.strptime(end_date_str, "%y%m%d").date()
         except ValueError:
@@ -41,10 +41,8 @@ class Budget:
         
         filtered_expenses = []
         for e in self.expenses:
-            # Expense 객체의 날짜 문자열을 date 객체로 변환하여 비교
             expense_date = datetime.date.fromisoformat(e.date)
             
-            # 지출 날짜가 시작일과 종료일 사이에 있는지 확인
             if start_date <= expense_date <= end_date:
                 filtered_expenses.append(e)
 
@@ -52,6 +50,39 @@ class Budget:
             print("해당 기간 내 지출 내역이 없습니다.\n")
             return
         
+        for idx, e in enumerate(filtered_expenses, 1):
+            print(f"{idx}. {e}")
+        print()
+
+    def category_summary(self):
+        if not self.expenses:
+            print("지출 내역이 없습니다.\n")
+            return
+        
+        category_totals = defaultdict(int)
+        for e in self.expenses:
+            category_totals[e.category] += e.amount
+        
+        print("\n[카테고리별 총 지출 요약]")
+        for category, total in sorted(category_totals.items()):
+            print(f"- {category}: {total}원")
+        print()
+
+    def filter_expenses_by_category(self, category_to_filter):
+        if not self.expenses:
+            print("지출 내역이 없습니다.\n")
+            return
+
+        filtered_expenses = [
+            e for e in self.expenses 
+            if e.category.strip().lower() == category_to_filter.strip().lower()
+        ]
+
+        if not filtered_expenses:
+            print(f"'{category_to_filter}' 카테고리의 지출 내역이 없습니다.\n")
+            return
+
+        print(f"\n[지출 목록] 카테고리: {category_to_filter}")
         for idx, e in enumerate(filtered_expenses, 1):
             print(f"{idx}. {e}")
         print()
