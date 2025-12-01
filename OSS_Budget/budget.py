@@ -2,8 +2,9 @@ import datetime
 from expense import Expense
 
 class Budget:
-    def __init__(self):
+    def __init__(self, income=0):
         self.expenses = []
+        self.income = income
 
     def add_expense(self, category, description, amount):
         today = datetime.date.today().isoformat()
@@ -23,5 +24,8 @@ class Budget:
     def total_spent(self):
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
-
-
+    
+    def savings_rate(self):
+        total = sum(e.amount for e in self.expenses)
+        saving = (self.income - total) / self.income * 100
+        print(f"저축률: {saving:.2f}%\n")
