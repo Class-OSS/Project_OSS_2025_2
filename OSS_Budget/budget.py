@@ -30,7 +30,7 @@ class Budget:
             print(f"삭제 완료: {removed.description} ({removed.amount}원)\n")
         else:
             print("잘못된 번호입니다.\n")
-
+# 저축 기능 추가
     def __init__(self):
        self.expenses = []
        self.goal_amount = None

@@ -14,7 +14,7 @@ def main():
         print("6. 저축 목표 설정")
         print("7. 저축 입력")
         print("8. 저축 현황 보기")
-
+    #저축 기능 추가
         choice = input("선택 > ")
 
         if choice == "1":
