@@ -4,7 +4,7 @@ import tkinter as tk
 class Calculator:
     def __init__(self, root):
         self.root = root
-        self.root.title("계산기")
+        self.root.title("팁(rate) 계산기")
         self.root.geometry("300x450")
 
         self.expression = ""
@@ -19,7 +19,8 @@ class Calculator:
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            ['=', 'W->$']   # ★ 원화 → 달러 버튼 추가
+            ['5%','10%','20%','30%'],
+            
         ]
 
         for row in buttons:
@@ -39,23 +40,45 @@ class Calculator:
         if char == 'C':
             self.expression = ""
 
-        # ★ 원화 → 달러 변환 기능
-        elif char == 'W->$':
+        elif char == '5%':
             try:
-                rate = 1350  # 고정 환율 (원화 1350원 = 1달러)
-                won = float(self.expression)  # 입력 숫자
-                dollar = won / rate
-                self.expression = str(round(dollar, 2))  # 소수 둘째 자리까지 표시
+                amount = float(self.expression)
+                tip= amount * 0.05
+                self.expression = str(round (tip,2))
+
+            except Exception:
+                self.expression = "에러"
+
+     
+        elif char == '10%':
+            try:
+                amount = float(self.expression)
+                tip= amount * 0.1
+                self.expression = str(round (tip,2))
+
             except Exception:
                 self.expression = "에러"
 
       
-        elif char == '=':
+        elif char == '20%':
             try:
-                self.expression = str(eval(self.expression))
+                amount = float(self.expression)
+                tip= amount * 0.2
+                self.expression = str(round (tip,2))
+                
             except Exception:
                 self.expression = "에러"
-
+        
+        elif char == '30%':
+            try:
+                amount = float(self.expression)
+                tip= amount * 0.3
+                self.expression = str(round (tip,2))
+                
+            except Exception:
+                self.expression = "에러"
+        
+      
       
         else:
             self.expression += str(char)
