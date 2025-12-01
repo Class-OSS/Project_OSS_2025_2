@@ -1,15 +1,15 @@
 from budget import Budget
 
-
 def main():
     budget = Budget()
 
     while True:
-        print("==== 간단 가계부 ====")
+        print("\n==== 간단 가계부 ====")
         print("1. 지출 추가")
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
-        print("4. 종료")
+        print("4. 지출 검색")
+        print("5. 종료")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -29,12 +29,15 @@ def main():
             budget.total_spent()
 
         elif choice == "4":
+            keyword = input("검색할 키워드 (카테고리, 설명): ")
+            budget.search_expenses(keyword)
+
+        elif choice == "5":
             print("가계부를 종료합니다.")
             break
 
         else:
             print("잘못된 선택입니다.\n")
-
 
 if __name__ == "__main__":
     main()
