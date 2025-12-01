@@ -15,9 +15,14 @@ class Budget:
         if not self.expenses:
             print("지출 내역이 없습니다.\n")
             return
+        max_amount = max(e.amount for e in self.expenses)
         print("\n[지출 목록]")
         for idx, e in enumerate(self.expenses, 1):
-            print(f"{idx}. {e}")
+            
+            message = f"{idx}. {e}"
+            if e.amount == max_amount:
+                message += " (! 목록에서 가장 큰 지출입니다. !)"
+            print(message)
         print()
 
     def total_spent(self):
