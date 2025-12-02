@@ -1,5 +1,7 @@
 import datetime
 from expense import Expense
+from collections import defaultdict #딕셔너리 확장 자료구조
+ 
 
 class Budget:
     def __init__(self):
@@ -37,3 +39,23 @@ class Budget:
         print(f"총 지출: {total}원\n")
 
 
+   
+    def rate_spent(self):  # 카테고리별 금액 비율 출력
+        
+        if not self.expenses:
+            print("지출 내역이 없습니다.\n")
+            return
+
+        # 총 금액
+        total = sum(e.amount for e in self.expenses)
+
+        # 카테고리별 합
+        summary = defaultdict(int)
+        for e in self.expenses:
+            summary[e.category] += e.amount
+
+        print("카테고리별 지출 비율:")
+        for cat, amt in summary.items():
+            ratio = (amt / total) * 100
+            print(f"- {cat}: {ratio:.2f}%")
+        
