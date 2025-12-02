@@ -11,6 +11,7 @@ def main():
         print("3. 총 지출 보기")
         print("4. 종료")
 	print("5. 지난달과 차액 계산")
+        print("6. 지출 삭제")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -54,6 +55,15 @@ def main():
                 )
             else:
                 print(f"두 달의 지출이 같습니다. (각 {current_total:,}원)\n")
+        elif choice == "6":  # 지출 삭제
+            budget.list_expenses()
+            if not budget.expenses:
+                continue
+            try:
+                idx = int(input("삭제할 지출 번호 입력: "))
+                budget.delete_expense(idx)
+            except ValueError:
+                print("번호는 숫자만 입력 가능합니다.\n")
 
         else:
             print("잘못된 선택입니다.\n")

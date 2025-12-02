@@ -23,5 +23,10 @@ class Budget:
     def total_spent(self):
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
-
+    def delete_expense(self, index: int):
+        if 1 <= index <= len(self.expenses):
+            removed = self.expenses.pop(index - 1)
+            print(f"삭제됨 → {removed}\n")
+        else:
+            print("잘못된 번호입니다.\n")
 
