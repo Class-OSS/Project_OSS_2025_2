@@ -25,3 +25,13 @@ class Budget:
         print(f"총 지출: {total}원\n")
 
 
+    def delete_prev_expense(self):
+
+        if not self.expenses:
+            print("지출내역이 하나도 없습니다.")
+            return
+        expense = self.expenses[-1]
+        
+        print("지출을 삭제합니다.\n")
+        print(f"[삭제된 지출: 카테고리: {expense.category}, 설명: {expense.description}, 금액: {expense.amount}]\n")
+        self.expenses.remove(expense)

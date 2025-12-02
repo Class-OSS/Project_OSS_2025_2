@@ -8,3 +8,5 @@ class Expense:
 
     def __str__(self):
         return f"[{self.date}] {self.category} - {self.description}: {self.amount}원"
+
+    
