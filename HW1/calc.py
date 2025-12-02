@@ -1,13 +1,16 @@
 import tkinter as tk
-import math
+
 
 class Calculator:
     def __init__(self, root):
         self.root = root
         self.root.title("계산기")
-        self.root.geometry("300x450")
+        self.root.geometry("300x400")
 
         self.expression = ""
+
+        self.formula_label = tk.Label(root, text="", font=("Arial", 12), fg="gray", anchor="e")
+        self.formula_label.pack(fill="both", padx=10)
 
         self.entry = tk.Entry(root, font=("Arial", 24), justify="right")
         self.entry.pack(fill="both", ipadx=8, ipady=15, padx=10, pady=10)
@@ -17,7 +20,7 @@ class Calculator:
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            [',', '=', 'GCD/LCM']
+            ['=']
         ]
 
         for row in buttons:
@@ -35,35 +38,20 @@ class Calculator:
     def on_click(self, char):
         if char == 'C':
             self.expression = ""
+            self.formula_label.config(text="")
         elif char == '=':
             try:
-                self.expression = str(eval(self.expression))
+                result = str(eval(self.expression))
+                self.formula_label.config(text=self.expression)
+                self.expression = result
             except Exception:
                 self.expression = "error"
-        elif char == 'GCD/LCM':
-            try:
-                if ',' in self.expression:
-                    parts = self.expression.split(',')
-                    if len(parts) == 2:
-                        n1 = int(parts[0].strip())
-                        n2 = int(parts[1].strip())
-                        gcd = math.gcd(n1, n2)
-                        lcm = n1 * n2 // gcd
-                        self.expression = f"GCD={gcd}, LCM={lcm}"
-                    else:
-                        self.expression = "error"
-                else:
-                    self.expression = "error"
-            except Exception:
-                self.expression = "error"
+                self.formula_label.config(text="")
         else:
+            if self.expression == "error":
+                self.expression = ""
             self.expression += str(char)
+            self.formula_label.config(text=self.expression)
 
         self.entry.delete(0, tk.END)
         self.entry.insert(tk.END, self.expression)
-
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    calc = Calculator(root)
-    root.mainloop()
