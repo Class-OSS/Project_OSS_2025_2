@@ -24,4 +24,20 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
+      # 추가 기능: 3개월(90일) 지난 지출 자동 삭제
+   
+    def remove_old_expenses_3months(self):
+        """3개월(90일)보다 오래된 지출 자동 삭제"""
+        today = datetime.date.today()
+        threshold = today - datetime.timedelta(days=90)
 
+        before = len(self.expenses)
+
+        # 90일 이내 기록만 남김
+        self.expenses = [
+            e for e in self.expenses
+            if datetime.date.fromisoformat(e.date) >= threshold
+        ]
+
+        deleted = before - len(self.expenses)
+        print(f"3개월 이상 지난 지출 {deleted}개 삭제 완료.\n")
