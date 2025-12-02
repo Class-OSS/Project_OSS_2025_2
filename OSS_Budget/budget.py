@@ -25,3 +25,5 @@ class Budget:
         print(f"총 지출: {total}원\n")
 
 
+
+
