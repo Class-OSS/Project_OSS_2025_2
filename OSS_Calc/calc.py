@@ -1,6 +1,5 @@
 import tkinter as tk
 
-
 class Calculator:
     def __init__(self, root):
         self.root = root
@@ -18,7 +17,8 @@ class Calculator:
             ['7', '8', '9', '/'],
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
-            ['0', '.', 'C', '+'],
+            ['0', '.', 'C', '←', '+'],
+            ['x²'],
             ['=']
         ]
 
@@ -37,6 +37,13 @@ class Calculator:
     def on_click(self, char):
         if char == 'C':
             self.expression = ""
+        
+        elif char == '←':
+            self.expression = self.expression[:-1]
+
+        elif char == 'x²':
+            self.expression += "**2"
+
         elif char == '=':
             try:
                 self.expression = str(eval(self.expression))
@@ -47,6 +54,3 @@ class Calculator:
 
         self.entry.delete(0, tk.END)
         self.entry.insert(tk.END, self.expression)
-
-
-
