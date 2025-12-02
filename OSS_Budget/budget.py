@@ -29,3 +29,21 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         saving = (self.income - total) / self.income * 100
         print(f"저축률: {saving:.2f}%\n")
+
+
+    def category_stats(self):
+        if not self.expenses:
+            print("지출 내역이 없습니다.\n")
+            return
+
+        category_sum = {}
+        for e in self.expenses:
+            category_sum[e.category] = category_sum.get(e.category, 0) + e.amount
+
+        total = sum(category_sum.values())
+
+        print("\n[카테고리별 지출 금액 및 비율]")
+        for category, amount in category_sum.items():
+            percent = (amount / total) * 100
+            print(f"{category}: {amount}원 ({percent:.2f}%)")
+        
