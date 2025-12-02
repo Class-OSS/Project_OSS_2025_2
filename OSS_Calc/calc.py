@@ -1,5 +1,6 @@
 import tkinter as tk
-
+import random  # 랜덤 기능
+import string  # 글자 조합 기능
 
 class Calculator:
     def __init__(self, root):
@@ -9,17 +10,17 @@ class Calculator:
 
         self.expression = ""
 
-        # 입력창
+        
         self.entry = tk.Entry(root, font=("Arial", 24), justify="right")
         self.entry.pack(fill="both", ipadx=8, ipady=15, padx=10, pady=10)
 
-        # 버튼 생성
+       
         buttons = [
             ['7', '8', '9', '/'],
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            ['=']
+            ['=', 'PW'] 
         ]
 
         for row in buttons:
@@ -42,11 +43,26 @@ class Calculator:
                 self.expression = str(eval(self.expression))
             except Exception:
                 self.expression = "에러"
+        
+        # 비밀번호 생성 기능 
+        elif char == 'PW':
+            try:
+               
+                src = string.ascii_letters + string.digits
+                # 8자리 랜덤 생성
+                pw = ''.join(random.sample(src, 8))
+                self.expression = pw
+            except:
+                self.expression = "오류"
+        
         else:
             self.expression += str(char)
-
+        
+       
         self.entry.delete(0, tk.END)
         self.entry.insert(tk.END, self.expression)
 
-
-
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = Calculator(root)
+    root.mainloop()
