@@ -9,7 +9,8 @@ def main():
         print("1. 지출 추가")
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
-        print("4. 종료")
+        print("4. 지출 삭제")
+        print("5. 종료")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -29,12 +30,22 @@ def main():
             budget.total_spent()
 
         elif choice == "4":
+            budget.list_expenses()
+
+            if budget.expenses:
+                index_input = input("삭제할 지출의 번호(숫자)를 입력하시오 : ").strip()
+ 
+                if index_input:
+                    budget.delete_expense(index_input)
+                else:
+                    print("입력값이 비어있으므로 삭제를 취소합니다.")
+        
+        elif choice == '5':
             print("가계부를 종료합니다.")
-            break
+            break 
 
         else:
             print("잘못된 선택입니다.\n")
-
 
 if __name__ == "__main__":
     main()

@@ -17,8 +17,8 @@ class Calculator:
         buttons = [
             ['7', '8', '9', '/'],
             ['4', '5', '6', '*'],
-            ['1', '2', '3', '-'],
-            ['0', '.', 'C', '+'],
+            ['1', '2', '3', 'DEL'], #  'DEL' 버튼 추가
+            ['0', '.', 'C', '-'],   
             ['=']
         ]
 
@@ -35,18 +35,30 @@ class Calculator:
                 btn.pack(side="left", expand=True, fill="both")
 
     def on_click(self, char):
-        if char == 'C':
+        
+        # 백스페이스 기능 (DEL) 로직 추가 
+        if char == 'DEL': 
+            current_sequence = self.expression 
+            
+            if current_sequence:
+                self.expression = current_sequence[0:len(current_sequence)-1]
+        
+        # 'C' (초기화) 
+        elif char == 'C':
             self.expression = ""
+
+        # '=' (계산) 로직
         elif char == '=':
             try:
-                self.expression = str(eval(self.expression))
+                final_calc = str(eval(self.expression))
+                self.expression = final_calc
             except Exception:
-                self.expression = "에러"
+                self.expression = "Compute Error"
+        
+        # 나머지 숫자/연산자 입력
         else:
             self.expression += str(char)
 
         self.entry.delete(0, tk.END)
         self.entry.insert(tk.END, self.expression)
-
-
 
