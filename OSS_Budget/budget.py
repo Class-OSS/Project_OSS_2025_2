@@ -24,4 +24,18 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
+    def search_expenses(self, keyword):
+        results = []
+        for real_idx, e in enumerate(self.expenses):
+            if (keyword in e.category) or (keyword in e.description):
+                results.append((real_idx, e))
+        return results
 
+    def delete_expense(self, real_idx):
+        try:
+            deleted = self.expenses.pop(real_idx)
+            print(f"지출 내역이 삭제되었습니다: {deleted.description} ({deleted.amount}원)\n")
+            return True
+        except IndexError:
+            print("잘못된 인덱스입니다.\n")
+            return False
