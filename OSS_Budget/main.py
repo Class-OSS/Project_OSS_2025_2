@@ -9,7 +9,8 @@ def main():
         print("1. 지출 추가")
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
-        print("4. 종료")
+        print("4. 예산 초과 확인")   # 새 메뉴 추가
+        print("5. 종료")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -28,7 +29,17 @@ def main():
         elif choice == "3":
             budget.total_spent()
 
-        elif choice == "4":
+        elif choice == "4":    # 예산 초과 확인 기능
+            try:
+                limit = int(input("예산 한도를 입력하세요(원): "))
+            except ValueError:
+                print("잘못된 금액입니다.\n")
+                continue
+
+            result = budget.check_over_budget(limit)
+            print(result + "\n")
+
+        elif choice == "5":
             print("가계부를 종료합니다.")
             break
 
