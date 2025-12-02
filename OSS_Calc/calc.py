@@ -1,83 +1,108 @@
 import tkinter as tk
-import re
 
 class Calculator:
     def __init__(self, root):
         self.root = root
         self.root.title("계산기")
-        self.root.geometry("300x460")
+        self.root.geometry("300x470")
 
         self.expression = ""
 
+        
         self.entry = tk.Entry(root, font=("Arial", 24), justify="right")
         self.entry.pack(fill="both", ipadx=8, ipady=15, padx=10, pady=10)
 
+        
         buttons = [
             ['7', '8', '9', '/'],
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
-            ['0', '.', 'C', '+'],
-            ['=']
+            ['0', '.', '(', '+'],
+            [')', 'C', '=', 'Unit']
         ]
 
         for row in buttons:
             frame = tk.Frame(root)
             frame.pack(expand=True, fill="both")
             for char in row:
-                btn = tk.Button(
-                    frame, text=char, font=("Arial", 18),
-                    command=lambda ch=char: self.on_click(ch)
-                )
+                if char == 'Unit':
+                    btn = tk.Button(frame, text=char, font=("Arial", 18),
+                                    command=self.convert_unit)
+                else:
+                    btn = tk.Button(frame, text=char, font=("Arial", 18),
+                                    command=lambda ch=char: self.on_click(ch))
                 btn.pack(side="left", expand=True, fill="both")
 
     def on_click(self, char):
-        if char == "C":
-            self.reset()
-        elif char == "=":
+        
+        if char == 'C':
+            self.expression = ""
+        elif char == '=':
             self.calculate()
         else:
-            self.expression += str(char)
-            self.update_entry(self.expression)
+            self.handle_input(char)
 
-    def reset(self):
-        self.expression = ""
-        self.entry.config(fg="black")
-        self.update_entry("")
+        self.update_display()
 
-    def update_entry(self, text):
-        self.entry.delete(0, tk.END)
-        self.entry.insert(tk.END, text)
+    def handle_input(self, char):
+        # 괄호 자동 완성
+        if char == '(':
+            if self.expression and self.expression[-1].isdigit():
+                # 자동 곱셈 방지
+                self.expression += "*()"
+            else:
+                self.expression += "()"
+            return
+
+        self.expression += str(char)
 
     def calculate(self):
-        if not self.expression:
-            return
+        try:
+            # 자동 괄호
+            open_cnt = self.expression.count("(")
+            close_cnt = self.expression.count(")")
+            if close_cnt < open_cnt:
+                self.expression += ")" * (open_cnt - close_cnt)
 
-        # 허용된 문자만 입력되었는지 검사
-        if not re.match(r'^[0-9+\-*/.]+$', self.expression):
-            self.show_error("허용되지 않은 문자가 포함되어 있습니다.")
-            return
+            self.expression = str(eval(self.expression))
+        except:
+            self.expression = "에러"
 
-        # 연속된 연산자 오류
-        if re.search(r'[\+\-\*/]{2,}', self.expression):
-            self.show_error("연산자가 연속으로 사용되었습니다.")
-            return
-
-        # 시작이나 끝이 연산자인 경우
-        if self.expression[0] in "*/" or self.expression[-1] in "+-*/":
-            self.show_error("잘못된 연산자 위치입니다.")
-            return
+    def convert_unit(self):
+        """
+        자동 단위 변환 기능
+        지원 변환:
+        cm <-> m, kg <-> g
+        """
+        text = self.expression
 
         try:
-            result = str(eval(self.expression))
-            self.expression = result
-            self.entry.config(fg="black")
-            self.update_entry(result)
-        except ZeroDivisionError:
-            self.show_error("0으로 나눌 수 없습니다.")
-        except Exception:
-            self.show_error("계산에 실패했습니다.")
+            if text.endswith("cm"):
+                value = float(text[:-2]) / 100
+                self.expression = str(value) + "m"
+            elif text.endswith("m"):
+                value = float(text[:-1]) * 100
+                self.expression = str(int(value)) + "cm"
+            elif text.endswith("kg"):
+                value = float(text[:-2]) * 1000
+                self.expression = str(int(value)) + "g"
+            elif text.endswith("g"):
+                value = float(text[:-1]) / 1000
+                self.expression = str(value) + "kg"
+            else:
+                # 단위가 없거나 인식 불가 시 에러
+                pass
+        except:
+            self.expression = "에러"
 
-    def show_error(self, message):
-        self.entry.config(fg="red")
-        self.update_entry(message)
-        self.expression = ""
+        self.update_display()
+
+    def update_display(self):
+        self.entry.delete(0, tk.END)
+        self.entry.insert(tk.END, self.expression)
+
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    calc = Calculator(root)
+    root.mainloop()
