@@ -9,7 +9,9 @@ def main():
         print("1. 지출 추가")
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
-        print("4. 종료")
+        print("4. 카테고리별 지출 금액 및 비율")
+        print("5. 저축률 보기")
+        print("6. 종료")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -29,8 +31,20 @@ def main():
             budget.total_spent()
 
         elif choice == "4":
+            budget.category_stats()
+
+        elif choice =="5":
+            try:
+                income = int(input("이번 달 수입을 입력하세요: "))
+                budget.income = income
+            except ValueError:
+                print("잘못된 금액입니다.\n")
+            budget.savings_rate()
+
+        elif choice == "6":
             print("가계부를 종료합니다.")
             break
+
 
         else:
             print("잘못된 선택입니다.\n")
