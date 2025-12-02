@@ -64,5 +64,24 @@ class Budget:
         except ValueError:
             print("잘못된 입력입니다.\n")
 
+    def category_summary(self):
+        if not self.expenses:
+           print("지출 내역이 없습니다.\n")
+           return
 
+        summary = {}  # 카테고리별 합계를 저장할 딕셔너리
+
+        for e in self.expenses:
+            if e.category in summary:
+                summary[e.category] += e.amount
+            else:
+                summary[e.category] = e.amount
+ 
+        total = sum(summary.values())
+
+        print("\n[카테고리별 지출 통계]")
+        for category, amount in summary.items():
+            percent = (amount / total) * 100
+            print(f"{category}: {amount}원 ({percent:.1f}%)")
+        print()
 
