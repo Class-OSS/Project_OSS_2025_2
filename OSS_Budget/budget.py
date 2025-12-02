@@ -23,5 +23,25 @@ class Budget:
     def total_spent(self):
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
+def search_by_category(self):
+        print("\n--- 카테고리별 검색 ---")
+        category = input("검색할 카테고리를 입력하세요: ")
+        
+        print(f"\n[ {category} 검색 결과 ]")
+        found = False
+        total = 0
+        
+        for expense in self.expenses:
+            if expense.category == category:
+                print(f"날짜: {expense.date}, 내용: {expense.description}, 금액: {expense.amount}")
+                total += int(expense.amount)
+                found = True
+        
+        if not found:
+            print("해당 카테고리의 내역이 없습니다.")
+        else:
+            print(f"-------------------------")
+            print(f"{category} 총 지출액: {total}원")
+        print("")
 
 
