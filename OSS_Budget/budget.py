@@ -24,4 +24,18 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
-
+    def filte_by_date_range(self,start_data,end_date):
+        start=datetime.date.fromisoformat(start_data)
+        end=datetime.date.fromisoformat(end_data)
+        filter=[
+            e for e in self.expense
+            if start<=datetime.date.fromisoformat(e.data)<=end
+        ]
+        if not filtered:
+            print(f"{start_date}~{end_data}기간의 지출이 없습니다.\n")
+            return
+            print(f"\n{start_date}~{end_data}기간 지출 목록")
+            for idx,e in enumerate(filtered,1):
+               print(f"{idx}.{e}")
+            date_total=sum(e.amount for e in filtered)
+            print (f"\n기간 총 지출:{date_total}원\n")
