@@ -1,5 +1,5 @@
 import tkinter as tk
-
+import math
 
 class Calculator:
     def __init__(self, root):
@@ -18,8 +18,8 @@ class Calculator:
             ['7', '8', '9', '/'],
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
-            ['0', '.', 'C', '+'],
-            ['=']
+            ['0', 'D', '.', '+'],
+            ['=', 'C','sqrt']
         ]
 
         for row in buttons:
@@ -42,6 +42,17 @@ class Calculator:
                 self.expression = str(eval(self.expression))
             except Exception:
                 self.expression = "에러"
+        
+        elif char=='D': # D(del) 누르면 입력값에서 한자리 줄이기
+            self.expression=self.expression[:-1]
+
+        elif char =='sqrt': #제곱근을 구하는 기능 추가
+            try:
+                result=math.sqrt(eval(self.expression))
+                self.expression=str(result)
+            except Exception:
+                self.expression="에러"
+
         else:
             self.expression += str(char)
 
