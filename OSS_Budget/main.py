@@ -25,6 +25,20 @@ def main():
 
         elif choice == "2":
             budget.list_expenses()
+            if not budget.expenses:
+                continue
+            print("\n[메뉴] 번호를 입력해 삭제하거나, 0을 눌러 돌아가기")
+            try:
+                target = int(input("선택 > "))
+                if target == 0:
+                    continue
+                real_idx = target - 1
+                if budget.delete_expense(real_idx):
+                    pass
+                else:
+                    print("잘못된 선택입니다.\n")
+            except ValueError:
+                print("숫자를 입력해주세요.\n")
 
         elif choice == "3":
             budget.total_spent()
