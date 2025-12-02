@@ -19,7 +19,7 @@ class Calculator:
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            ['=']
+            ['=', 'DEL'] # <--- 'DEL' 버튼을 추가
         ]
 
         for row in buttons:
@@ -37,6 +37,8 @@ class Calculator:
     def on_click(self, char):
         if char == 'C':
             self.expression = ""
+        elif char == 'DEL'  : # <--- [신규 기능] 뒤에서 하나 지우기
+            self.expression = self.expression[:-1]
         elif char == '=':
             try:
                 self.expression = str(eval(self.expression))
