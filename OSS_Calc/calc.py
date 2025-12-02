@@ -1,6 +1,5 @@
 import tkinter as tk
 
-
 class Calculator:
     def __init__(self, root):
         self.root = root
@@ -13,13 +12,12 @@ class Calculator:
         self.entry = tk.Entry(root, font=("Arial", 24), justify="right")
         self.entry.pack(fill="both", ipadx=8, ipady=15, padx=10, pady=10)
 
-        # 버튼 생성
         buttons = [
             ['7', '8', '9', '/'],
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            ['=']
+            ['**', '='] 
         ]
 
         for row in buttons:
@@ -41,12 +39,9 @@ class Calculator:
             try:
                 self.expression = str(eval(self.expression))
             except Exception:
-                self.expression = "에러"
+                self.expression = "Error"
         else:
             self.expression += str(char)
 
         self.entry.delete(0, tk.END)
         self.entry.insert(tk.END, self.expression)
-
-
-
