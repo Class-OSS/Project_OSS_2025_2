@@ -19,7 +19,7 @@ class Calculator:
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            ['=']
+            ['=','x²','√','←']
         ]
 
         for row in buttons:
@@ -42,11 +42,23 @@ class Calculator:
                 self.expression = str(eval(self.expression))
             except Exception:
                 self.expression = "에러"
+        elif char == '←':
+            self.expression = self.expression[:-1]
+        elif char == 'x²':
+            try:
+                self.expression = str(eval(self.expression) ** 2)
+            except:
+                self.expression = "에러"
+
+        elif char == '√':
+            try:
+                self.expression = str(eval(self.expression) ** 0.5)
+            except:
+                self.expression = "에러"
         else:
             self.expression += str(char)
 
         self.entry.delete(0, tk.END)
         self.entry.insert(tk.END, self.expression)
 
-
-
+        
