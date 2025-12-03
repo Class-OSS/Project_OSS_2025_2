@@ -1,4 +1,6 @@
 from budget import Budget
+from budget_stats import print_monthly_summary, print_category_summary
+from budget_delete import delete_expense_interactive
 
 
 def main():
@@ -10,6 +12,9 @@ def main():
         print("2. 지출 목록 보기")
         print("3. 총 지출 보기")
         print("4. 종료")
+        print("5. 월별 지출 통계 보기")
+        print("6. 카테고리별 지출 통계 보기")
+        print("7. 지출 삭제")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -31,6 +36,15 @@ def main():
         elif choice == "4":
             print("가계부를 종료합니다.")
             break
+
+        elif choice == "5":
+            print_monthly_summary(budget.expenses)
+
+        elif choice == "6":
+            print_category_summary(budget.expenses)
+
+        elif choice == "7":
+            delete_expense_interactive(budget)
 
         else:
             print("잘못된 선택입니다.\n")
