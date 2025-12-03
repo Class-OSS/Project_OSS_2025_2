@@ -47,3 +47,26 @@ class Budget:
             percent = (amount / total) * 100
             print(f"{category}: {amount}원 ({percent:.2f}%)")
         
+    def delete_expense(self, index):
+        if index < 1 or index > len(self.expenses):
+            print("잘못된 번호입니다.\n")
+            return
+
+        removed = self.expenses.pop(index - 1)
+        print(f"삭제됨: {removed}\n")
+
+    def edit_expense(self, index, new_category=None, new_description=None, new_amount=None):
+        if index < 1 or index > len(self.expenses):
+            print("잘못된 번호입니다.\n")
+            return
+
+        exp = self.expenses[index - 1]
+
+        if new_category:
+            exp.category = new_category
+        if new_description:
+            exp.description = new_description
+        if new_amount is not None:
+            exp.amount = new_amount
+
+        print("지출 항목이 수정되었습니다.\n")
