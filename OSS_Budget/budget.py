@@ -39,4 +39,12 @@ class Budget:
             print("해당 카테고리에 지출 내역이 없습니다.")
         print()
 
+    def remove_expense(self, index):
+        real_idx = index - 1
+        if 0 <= real_idx < len(self.expenses):
+            removed = self.expenses.pop(real_idx)
+            print(f"삭제되었습니다: {removed.description} ({removed.amount}원)\n")
+        else:
+            print("잘못된 번호.\n")
+
 

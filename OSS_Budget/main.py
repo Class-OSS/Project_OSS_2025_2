@@ -8,9 +8,10 @@ def main():
         print("==== 간단 가계부 ====")
         print("1. 지출 추가")
         print("2. 지출 목록 보기")
-        print("3. 총 지출 보기") # 메뉴 추가
+        print("3. 총 지출 보기")
         print("4. 카테고리 검색")
-        print("5. 종료")
+        print("5. 지출 삭제") # 지출 삭제 메뉴 추가
+        print("6. 종료")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -33,7 +34,15 @@ def main():
             category = input("카테고리 검색: ")
             budget.search_by_category(category)
 
-        elif choice == "5":
+        elif choice == "5": # 지출 삭제
+            budget.list_expenses() # 목록을 먼저 보여줌
+            try:
+                idx = int(input("삭제할 번호: "))
+                budget.remove_expense(idx)
+            except ValueError:
+                print("숫자를 입력해주세요.\n")
+
+        elif choice == "6":
             print("가계부를 종료합니다.")
             break
 
