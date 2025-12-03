@@ -19,7 +19,7 @@ class Calculator:
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            ['=']
+            ['DEL', '%','=']
         ]
 
         for row in buttons:
@@ -37,11 +37,30 @@ class Calculator:
     def on_click(self, char):
         if char == 'C':
             self.expression = ""
+
+        elif char == 'DEL':
+            if self.expression:
+               self.expression = self.expression[:-1]
+            else:
+               self.expression = ""
+
+        elif char == '%':
+            try:
+                num_input = float(self.expression)
+                percent = num_input / 100
+
+                if percent.is_integer() :
+                   percent = int(percent)
+
+                self.expression = str(percent)
+            except:
+                self.expression = "error"
+
         elif char == '=':
             try:
                 self.expression = str(eval(self.expression))
             except Exception:
-                self.expression = "에러"
+                self.expression = "error"
         else:
             self.expression += str(char)
 
