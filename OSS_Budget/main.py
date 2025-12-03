@@ -12,6 +12,7 @@ def main():
         print("4. 종료")
 	print("5. 지난달과 차액 계산")
         print("6. 지출 삭제")
+        print("7. 지출 통계 보기")
         choice = input("선택 > ")
 
         if choice == "1":
@@ -64,6 +65,15 @@ def main():
                 budget.delete_expense(idx)
             except ValueError:
                 print("번호는 숫자만 입력 가능합니다.\n")
+        elif choice == "7":
+            stats = budget.get_statistics()
+            if stats is None:
+                print("지출 내역이 없습니다.\n")
+            else:
+                print("\n[지출 통계]")
+                print(f"- 평균 지출 금액: {stats['average']:.2f}원")
+                print(f"- 가장 많이 쓴 지출: {stats['max']}")
+                print(f"- 가장 적게 쓴 지출: {stats['min']}\n")
 
         else:
             print("잘못된 선택입니다.\n")

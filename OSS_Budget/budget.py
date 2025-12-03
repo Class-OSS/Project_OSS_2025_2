@@ -30,3 +30,19 @@ class Budget:
         else:
             print("잘못된 번호입니다.\n")
 
+    def get_statistics(self):
+        if not self.expenses:
+            return None
+
+        amounts = [e.amount for e in self.expenses]
+        total = sum(amounts)
+        avg = total / len(amounts)
+        max_expense = max(self.expenses, key=lambda x: x.amount)
+        min_expense = min(self.expenses, key=lambda x: x.amount)
+
+        return {
+            "average": avg,
+            "max": max_expense,
+            "min": min_expense
+        }
+
