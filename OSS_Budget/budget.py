@@ -58,6 +58,27 @@ class Budget:
             for i, (cat, amount) in enumerate(sorted_stats[:top_n], 1):
                 print(f"{i}. {cat}: {amount}원")
                 print()
+                
+    def month_avg_and_budget(self, ym, budget_amount=None):
+        month_expenses = [e for e in self.expenses if e.date.startswith(ym)]
+        if not month_expenses:
+            print(f"{ym}월 지출 기록이 없습니다.\n")
+            return
+        
+        total = sum(e.amount for e in month_expenses)
+        avg = total / len(month_expenses)
+        
+        print(f"\n[{ym}월 지출 통계]")
+        print(f"- 총 지출: {total}원")
+        print(f"- 지출 건수: {len(month_expenses)}건")
+        print(f"- 평균 지출: {avg:.2f}원")
+        
+        if budget_amount is not None:
+            ratio = total / budget_amount * 100
+            print(f"- 예산 대비 사용률: {ratio:.2f}% (예산: {budget_amount}원)")
+            print()
+
+
 
 
 
