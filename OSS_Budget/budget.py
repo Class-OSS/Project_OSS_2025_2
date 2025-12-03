@@ -24,4 +24,27 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
+    def search_by_category(self, category):
+        # 검색 결과를 보여주는 시작 메시지 출력
+        print(f"\n[검색 결과: {category}]")
+        # 검색 결과가 있는지 확인
+        found = False
+        
+        for idx, e in enumerate(self.expenses, 1):
+            if e.category == category:
+                print(f"{idx}. {e}")
+                found = True
+        
+        if not found:
+            print("해당 카테고리에 지출 내역이 없습니다.")
+        print()
+
+    def remove_expense(self, index):
+        real_idx = index - 1
+        if 0 <= real_idx < len(self.expenses):
+            removed = self.expenses.pop(real_idx)
+            print(f"삭제되었습니다: {removed.description} ({removed.amount}원)\n")
+        else:
+            print("잘못된 번호.\n")
+
 
