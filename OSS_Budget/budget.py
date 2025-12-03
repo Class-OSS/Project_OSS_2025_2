@@ -28,9 +28,7 @@ class Budget:
         if not self.expenses:
             print("지출 내역이 없습니다.\n")
             return
-
         max_e = max(self.expenses, key=lambda e: e.amount)
-
         print("\n[가장 큰 금액의 지출]")
         print(f"날짜: {max_e.date}")
         print(f"카테고리: {max_e.category}")
