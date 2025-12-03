@@ -2,8 +2,9 @@ import datetime
 from expense import Expense
 
 class Budget:
-    def __init__(self):
+    def __init__(self, income=0):
         self.expenses = []
+        self.income = income
 
     def add_expense(self, category, description, amount):
         today = datetime.date.today().isoformat()
@@ -23,5 +24,49 @@ class Budget:
     def total_spent(self):
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
+    
+    def savings_rate(self):
+        total = sum(e.amount for e in self.expenses)
+        saving = (self.income - total) / self.income * 100
+        print(f"저축률: {saving:.2f}%\n")
 
 
+    def category_stats(self):
+        if not self.expenses:
+            print("지출 내역이 없습니다.\n")
+            return
+
+        category_sum = {}
+        for e in self.expenses:
+            category_sum[e.category] = category_sum.get(e.category, 0) + e.amount
+
+        total = sum(category_sum.values())
+
+        print("\n[카테고리별 지출 금액 및 비율]")
+        for category, amount in category_sum.items():
+            percent = (amount / total) * 100
+            print(f"{category}: {amount}원 ({percent:.2f}%)")
+        
+    def delete_expense(self, index):
+        if index < 1 or index > len(self.expenses):
+            print("잘못된 번호입니다.\n")
+            return
+
+        removed = self.expenses.pop(index - 1)
+        print(f"삭제됨: {removed}\n")
+
+    def edit_expense(self, index, new_category=None, new_description=None, new_amount=None):
+        if index < 1 or index > len(self.expenses):
+            print("잘못된 번호입니다.\n")
+            return
+
+        exp = self.expenses[index - 1]
+
+        if new_category:
+            exp.category = new_category
+        if new_description:
+            exp.description = new_description
+        if new_amount is not None:
+            exp.amount = new_amount
+
+        print("지출 항목이 수정되었습니다.\n")
