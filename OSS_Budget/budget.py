@@ -24,4 +24,17 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
+     def total_by_month(self, year, month):
+        if not self.expenses:
+            print("지출 내역이 없습니다.\n")
+            return
 
+        ym = f"{year:04d}-{month:02d}"
+        total = 0
+
+        for e in self.expenses:
+            if hasattr(e, "date") and isinstance(e.date, str) and e.date.startswith(ym):
+                total += e.amount
+
+        print(f"\n[{year}년 {month}월 지출 합계]")
+        print(f"총 지출: {total}원\n")
