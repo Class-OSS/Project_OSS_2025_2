@@ -47,6 +47,3 @@ class Calculator:
 
         self.entry.delete(0, tk.END)
         self.entry.insert(tk.END, self.expression)
-
-
-
