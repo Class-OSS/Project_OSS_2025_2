@@ -24,4 +24,23 @@ class Budget:
         total = sum(e.amount for e in self.expenses)
         print(f"총 지출: {total}원\n")
 
+    def top_expenses(self):
+        if not self.expenses:
+            print("지출 내역이 없습니다.\n")
+            return
+
+        # 금액 기준 내림차순 정렬
+        sorted_expenses = sorted(self.expenses, key=lambda e: e.amount, reverse=True)
+
+        # 상위 3개만 추출
+        top3 = sorted_expenses[:3]
+
+        print("\n[지출 랭킹 Top 3]")
+        for idx, e in enumerate(top3, 1):
+            print(f"{idx}위: {e.amount}원 - {e.description} ({e.category})")
+        print()
+
+
+
+
 
