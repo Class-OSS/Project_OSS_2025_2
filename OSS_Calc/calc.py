@@ -1,4 +1,5 @@
 import tkinter as tk
+import re #  정규식(re) 모듈 추가
 
 
 class Calculator:
@@ -39,7 +40,16 @@ class Calculator:
             self.expression = ""
         elif char == '=':
             try:
-                self.expression = str(eval(self.expression))
+                # 계산 전에 표현식 전처리 (숫자 앞의 불필요한 0 제거)
+                # 정규식 패턴: (^|[-+*/])0+([1-9])
+                # - (^|[-+*/]): 문자열 시작(^)이거나 연산자([*+/-]) 뒤를 찾음 (그룹 1: \1)
+                # - 0+ : 0이 하나 이상 반복되는 것을 찾음
+                # - ([1-9]) : 0이 아닌 1~9 사이의 숫자를 찾음 (그룹 2: \2)
+                # 이 패턴에 걸린 '0'들은 제거되어 '03+7'이 '3+7'로 변환됩니다.
+                sanitized_expression = re.sub(r'(^|[-+*/])0+([1-9])', r'\1\2', self.expression)
+                
+                self.expression = str(eval(sanitized_expression))
+
             except Exception:
                 self.expression = "에러"
         else:
@@ -47,6 +57,3 @@ class Calculator:
 
         self.entry.delete(0, tk.END)
         self.entry.insert(tk.END, self.expression)
-
-
-
