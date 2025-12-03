@@ -46,7 +46,27 @@ class Calculator:
             self.expression += str(char)
 
         self.entry.delete(0, tk.END)
-        self.entry.insert(tk.END, self.expression)
+        self.entry.insert(tk.END, self.expression
+                         
+   def percentage(value, percent, *, round_result=False):
+    """
+    Calculate percent% of the given value.
+
+    - Checks if value and percent are numeric
+    - If round_result=True, returns rounded result (2 decimal places)
+    """
+    if not (isinstance(value, int) or isinstance(value, float)):
+        raise TypeError("value must be int or float")
+
+    if not (isinstance(percent, int) or isinstance(percent, float)):
+        raise TypeError("percent must be int or float")
+
+    result = value * (percent / 100)
+
+    if round_result:
+        return round(result, 2)
+
+    return result
 
 
 
