@@ -1,7 +1,6 @@
-#22212141 김희곤 계산기에 루트 버튼과 기능 추가
+# 22212141 김희곤 역수 버튼 기능 구현해서 소수로 표시시
 
 import tkinter as tk
-import math  # 수학 함수(루트) 사용을 위해 추가
 
 class Calculator:
     def __init__(self, root):
@@ -15,13 +14,13 @@ class Calculator:
         self.entry = tk.Entry(root, font=("Arial", 24), justify="right")
         self.entry.pack(fill="both", ipadx=8, ipady=15, padx=10, pady=10)
 
-        # 버튼 생성 (루트 √ 버튼 추가됨)
+        # 버튼 생성 (1/x 버튼 추가됨)
         buttons = [
             ['7', '8', '9', '/'],
             ['4', '5', '6', '*'],
             ['1', '2', '3', '-'],
             ['0', '.', 'C', '+'],
-            ['=', '√'] 
+            ['=', '1/x'] 
         ]
 
         for row in buttons:
@@ -37,14 +36,18 @@ class Calculator:
             self.expression = ""
         elif char == '=':
             try:
+                # 1/x 기능도 eval로 계산 가능하지만, 명확히 하기 위해 eval 사용
                 self.expression = str(eval(self.expression))
             except:
                 self.expression = "Error"
-        elif char == '√':
+        elif char == '1/x':
             try:
-                # 현재 입력된 숫자의 제곱근을 구함
+                # 역수 계산 (1 나누기 현재값)
                 val = eval(self.expression)
-                self.expression = str(math.sqrt(val))
+                if val == 0:
+                    self.expression = "Error"
+                else:
+                    self.expression = str(1 / val)
             except:
                 self.expression = "Error"
         else:
